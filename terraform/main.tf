@@ -1,3 +1,7 @@
+variable "project" {
+  type = string
+}
+
 variable "subscription_id" {
   type = string
 }
@@ -26,7 +30,7 @@ provider "azurerm" {
 }
 
 resource "azurerm_resource_group" "this" {
-  name     = "my-project-rg"
+  name     = "${var.project}-rg"
   location = "uksouth"
 }
 
