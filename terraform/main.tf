@@ -35,9 +35,9 @@ resource "azurerm_resource_group" "this" {
 }
 
 module "vm" {
-  source = "git::https://github.com/DogsbodyOps/tf-templates.git//azure/modules/simple-vm?ref=main"
+  source = "git::https://github.com/DogsbodyOps/tf-templates.git//azure/modules/simple-vm?ref=v1.0.0"
 
-  name                = "${var.project}"
+  name             = var.project
   location            = azurerm_resource_group.this.location
   resource_group_name = azurerm_resource_group.this.name
   admin_username      = var.admin_username

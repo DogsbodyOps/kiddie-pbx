@@ -1,5 +1,4 @@
 # VM Vars
-
 project         = "kiddie-pbx"
 subscription_id = "42205d9f-6637-4b6c-9a4a-f9e3a0aa15a0"
 tenant_id       = "8c34a907-6f84-4d25-b831-e940e2c2b650"
