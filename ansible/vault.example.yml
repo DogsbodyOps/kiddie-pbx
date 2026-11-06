@@ -1,0 +1,17 @@
+---
+# Copy to group_vars/asterisk/vault.yml and encrypt it:
+#   ansible-vault encrypt group_vars/asterisk/vault.yml
+# That path is gitignored because this repo is public. Keep a copy somewhere safe.
+#
+# The first digit of each number sets the caller's ring category in extensions.conf:
+# 1 sibling, 2 parent, 3 grandparent.
+vault_asterisk_extensions:
+  - number: "101"
+    name: Child One
+    password: CHANGE_ME
+  - number: "102"
+    name: Child Two
+    password: CHANGE_ME
+  - number: "201"
+    name: Parent
+    password: CHANGE_ME

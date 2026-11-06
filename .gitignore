@@ -1,4 +1,11 @@
+.vscode
+
 **.tfplan
 **.tfstate
 **.tfstate.backup
 **.terraform/
+
+ansible/inventory.ini
+ansible/group_vars/asterisk/vault.yml
+**.vault_pass*
+*.retry

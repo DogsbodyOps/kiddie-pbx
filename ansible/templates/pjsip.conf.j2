@@ -1,0 +1,129 @@
+; {{ ansible_managed }}
+; ============================================================================
+; pjsip.conf — Kids' Intercom System
+; ============================================================================
+; DESIGN NOTE: We use PJSIP "templates" (marked with "(!)") so that adding a
+; new extension is 3 short blocks that just reference a template, instead of
+; repeating every setting each time. This is the built-in Asterisk mechanism
+; for exactly this kind of "many similar endpoints" problem — no external
+; scripting needed.
+;
+; Object model recap (important if you're new to chan_pjsip):
+;   - "endpoint"  = the calling identity / call behaviour (codecs, context...)
+;   - "auth"      = the username/password used to REGISTER
+;   - "aor"       = "Address of Record" — where to actually send calls for
+;                   that endpoint (i.e. which device is currently registered)
+; A phone/softphone needs all three, and by convention people give all three
+; the SAME section name (the extension number). That's not a coincidence or
+; a shortcut — Asterisk explicitly supports repeated section names in
+; pjsip.conf because each block's "type=" line tells it which object it's
+; defining. This trips people up coming from other .conf files, so calling
+; it out.
+; ============================================================================
+
+
+; ----------------------------------------------------------------------------
+; GLOBAL SETTINGS — one per system, not per-extension
+; ----------------------------------------------------------------------------
+[global]
+type=global
+user_agent=KidsIntercom          ; cosmetic, shows in SIP headers/debugging
+max_forwards=70                  ; SIP loop-prevention hop count, leave default
+
+
+; ----------------------------------------------------------------------------
+; TRANSPORT — how Asterisk listens for SIP signalling
+; ----------------------------------------------------------------------------
+; UDP only, bound to all interfaces on the standard SIP port.
+; ASSUMPTION: this box lives on your home LAN and is NOT exposed to the
+; internet. If you ever port-forward 5060 to this box, come back and we
+; need to talk about TLS transport + fail2ban + strong auth passwords,
+; because an internet-facing PJSIP UDP endpoint with weak passwords is a
+; classic way to get your account used for toll fraud.
+[transport-udp]
+type=transport
+protocol=udp
+bind=0.0.0.0:5060
+
+
+; ----------------------------------------------------------------------------
+; ENDPOINT TEMPLATE — shared settings for every kid's extension
+; ----------------------------------------------------------------------------
+; "(!)" marks this as a pure template: Asterisk will NOT try to register a
+; real endpoint called "endpoint-internal" — it only exists to be inherited.
+[endpoint-internal](!)
+type=endpoint
+context=internal                 ; which dialplan context handles calls FROM this endpoint
+                                  ; (see extensions.conf)
+disallow=all                     ; start from "no codecs allowed", then explicitly allow below
+allow=opus                       ; best quality-per-bit available — adaptive bitrate, genuinely
+                                  ; better than G.711 while using LESS bandwidth. This is what
+                                  ; will matter most once calls are traversing the internet
+                                  ; (Azure) rather than the LAN, where upload bandwidth is a
+                                  ; real constraint. GHP611W supports it natively.
+allow=g722                       ; "wideband" G.711 variant — same 64kbps as plain G.711 below,
+                                  ; but roughly double the frequency range (7kHz vs 3.4kHz), so
+                                  ; noticeably clearer, especially on kids' higher-pitched voices.
+                                  ; Zero bandwidth cost over what you're using now — pure upgrade.
+allow=alaw                       ; European PSTN-compatible fallback codec
+dtmf_mode=rfc4733                ; DTMF (keypad tones) sent as RTP events, not audio —
+                                  ; more reliable than in-band tones
+direct_media=no                  ; force RTP audio to always flow through Asterisk rather than
+                                  ; peer-to-peer between the two phones. Slightly more server
+                                  ; load, but much simpler NAT/firewall behaviour — worth it
+                                  ; for a small home system.
+rtp_symmetric=yes                ; send RTP back to whatever port/IP it actually came FROM,
+                                  ; not what the phone claimed in its SDP — fixes most NAT issues
+force_rport=yes                  ; same idea, for the signalling port
+rewrite_contact=yes              ; update the registered Contact with the real observed
+                                  ; source address (again: NAT correctness)
+
+
+; ----------------------------------------------------------------------------
+; AUTH TEMPLATE — shared auth settings (username/password come per-extension)
+; ----------------------------------------------------------------------------
+[auth-internal](!)
+type=auth
+auth_type=userpass
+
+
+; ----------------------------------------------------------------------------
+; AOR TEMPLATE — shared "address of record" settings
+; ----------------------------------------------------------------------------
+[aor-internal](!)
+type=aor
+max_contacts=1                   ; one device registered per extension at a time —
+                                  ; sensible default for "one phone per kid"
+remove_existing=yes              ; if a new device registers, kick the old registration
+                                  ; instead of rejecting the new one (handles phone reboots
+                                  ; cleanly without manual intervention)
+qualify_frequency=60             ; OPTIONS-ping the device every 60s so Asterisk knows
+                                  ; quickly if a phone has gone offline
+
+
+; ============================================================================
+; EXTENSIONS
+; ============================================================================
+; Generated by Ansible from vault_asterisk_extensions. To add an extension:
+;   1. Pick a free 3-digit number. The first digit sets the caller category
+;      used in extensions.conf (1 sibling, 2 parent, 3 grandparent).
+;   2. Add it to group_vars/asterisk/vault.yml with `ansible-vault edit`.
+;   3. Re-run the playbook.
+;
+; Don't reuse one password across extensions; if one phone's config leaks, you
+; don't want it handing over every extension.
+; ============================================================================
+{% for ext in vault_asterisk_extensions %}
+
+; --- Extension {{ ext.number }} -----------------------------------------------------
+[{{ ext.number }}](endpoint-internal)
+auth={{ ext.number }}
+aors={{ ext.number }}
+callerid = {{ ext.name }} <{{ ext.number }}>
+
+[{{ ext.number }}](auth-internal)
+username={{ ext.number }}
+password={{ ext.password }}
+
+[{{ ext.number }}](aor-internal)
+{% endfor %}

@@ -1,0 +1,10 @@
+---
+asterisk_version: "22.11.0"
+asterisk_sha256: 3bd5ee040509a3d3cd9b1ba9520c18e6ec0a7e7981ca68c457dcd36ba3c54d94
+
+# Changes from the menuselect defaults, as chosen on the original install.
+asterisk_menuselect_enable:
+  - MOH-OPSOUND-G722
+  - EXTRA-SOUNDS-EN-G722
+asterisk_menuselect_disable:
+  - app_followme

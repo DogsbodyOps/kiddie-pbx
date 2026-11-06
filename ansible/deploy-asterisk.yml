@@ -1,0 +1,193 @@
+---
+# Builds Asterisk from source and deploys the intercom config.
+# See docs/asterisk-setup.md for how to run it and how it differs from the original install.
+
+- name: Deploy Asterisk
+  hosts: asterisk
+  become: true
+
+  tasks:
+    - name: Check the extensions in the vault
+      ansible.builtin.assert:
+        that:
+          - vault_asterisk_extensions is defined
+          - vault_asterisk_extensions | length > 0
+          - vault_asterisk_extensions | map(attribute='password') | select('search', 'CHANGE_ME') | list | length == 0
+          - vault_asterisk_extensions | map(attribute='number') | map('string') | select('match', '^[0-9]{3}$') | list | length == vault_asterisk_extensions | length
+        fail_msg: >-
+          Set up group_vars/asterisk/vault.yml from vault.example.yml, with a 3-digit
+          number and a real password for every extension.
+        quiet: true
+      no_log: true
+
+    - name: Read the installed Asterisk version
+      ansible.builtin.command: asterisk -V
+      register: asterisk_installed
+      changed_when: false
+      failed_when: false
+      check_mode: false
+
+    - name: Build and install Asterisk
+      when: asterisk_installed.stdout | default('') != 'Asterisk ' ~ asterisk_version
+      vars:
+        asterisk_src: "/usr/local/src/asterisk-{{ asterisk_version }}"
+      block:
+        - name: Install the tools needed to start the build
+          ansible.builtin.package:
+            name: [gcc, make, tar, gzip, bzip2, wget]
+            state: present
+
+        - name: Download the source
+          ansible.builtin.get_url:
+            url: "https://downloads.asterisk.org/pub/telephony/asterisk/releases/asterisk-{{ asterisk_version }}.tar.gz"
+            dest: "/usr/local/src/asterisk-{{ asterisk_version }}.tar.gz"
+            checksum: "sha256:{{ asterisk_sha256 }}"
+            mode: "0644"
+
+        - name: Unpack the source
+          ansible.builtin.unarchive:
+            src: "/usr/local/src/asterisk-{{ asterisk_version }}.tar.gz"
+            dest: /usr/local/src
+            remote_src: true
+            creates: "{{ asterisk_src }}/configure"
+
+        - name: Install build dependencies
+          ansible.builtin.command:
+            cmd: ./contrib/scripts/install_prereq install
+            chdir: "{{ asterisk_src }}"
+          environment:
+            DEBIAN_FRONTEND: noninteractive
+          changed_when: true
+
+        - name: Configure
+          ansible.builtin.command:
+            cmd: ./configure --with-jansson-bundled
+            chdir: "{{ asterisk_src }}"
+          changed_when: true
+
+        - name: Generate the default module selection
+          ansible.builtin.command:
+            cmd: make menuselect.makeopts
+            chdir: "{{ asterisk_src }}"
+          changed_when: true
+
+        - name: Apply the module selection
+          ansible.builtin.command:
+            argv: >-
+              {{ ['menuselect/menuselect']
+              + (asterisk_menuselect_enable | map('regex_replace', '^', '--enable=') | list)
+              + (asterisk_menuselect_disable | map('regex_replace', '^', '--disable=') | list)
+              + ['menuselect.makeopts'] }}
+            chdir: "{{ asterisk_src }}"
+          changed_when: true
+
+        - name: Compile
+          ansible.builtin.command:
+            cmd: "make -j{{ ansible_facts.processor_vcpus }}"
+            chdir: "{{ asterisk_src }}"
+          changed_when: true
+
+        - name: Install binaries, modules and sounds
+          ansible.builtin.command:
+            cmd: make install
+            chdir: "{{ asterisk_src }}"
+          changed_when: true
+          notify: Restart Asterisk
+
+        - name: Install the logrotate config
+          ansible.builtin.command:
+            cmd: make install-logrotate
+            chdir: "{{ asterisk_src }}"
+          changed_when: true
+
+    - name: Create the asterisk user
+      ansible.builtin.user:
+        name: asterisk
+        system: true
+        home: /var/lib/asterisk
+        create_home: false
+        shell: /usr/sbin/nologin
+
+    - name: Give the asterisk user its directories
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: directory
+        owner: asterisk
+        group: asterisk
+        recurse: true
+      loop:
+        - /var/lib/asterisk
+        - /var/spool/asterisk
+        - /var/log/asterisk
+        - /var/cache/asterisk
+
+    - name: Create the config directory
+      ansible.builtin.file:
+        path: /etc/asterisk
+        state: directory
+        owner: asterisk
+        group: asterisk
+        mode: "0750"
+
+    - name: Deploy config files
+      ansible.builtin.copy:
+        src: asterisk/
+        dest: /etc/asterisk/
+        owner: asterisk
+        group: asterisk
+        mode: "0640"
+        backup: true
+      notify: Restart Asterisk
+
+    - name: Deploy pjsip.conf
+      ansible.builtin.template:
+        src: pjsip.conf.j2
+        dest: /etc/asterisk/pjsip.conf
+        owner: asterisk
+        group: asterisk
+        mode: "0640"
+        backup: true
+      diff: false
+      no_log: true
+      notify: Restart Asterisk
+
+    - name: Deploy the systemd unit
+      ansible.builtin.copy:
+        src: asterisk.service
+        dest: /etc/systemd/system/asterisk.service
+        owner: root
+        group: root
+        mode: "0644"
+      notify: Restart Asterisk
+
+    - name: Let the asterisk user write rotated logs
+      ansible.builtin.replace:
+        path: /etc/logrotate.d/asterisk
+        regexp: 'create 640 root root'
+        replace: 'create 640 asterisk asterisk'
+
+    - name: Enable and start Asterisk
+      ansible.builtin.systemd:
+        name: asterisk
+        enabled: true
+        state: started
+        daemon_reload: true
+
+    - name: Apply any pending restart
+      ansible.builtin.meta: flush_handlers
+
+    - name: Check Asterisk answers and PJSIP has loaded
+      ansible.builtin.command: asterisk -rx "pjsip show transports"
+      register: asterisk_check
+      changed_when: false
+      check_mode: false
+      retries: 6
+      delay: 5
+      until: asterisk_check.rc == 0 and 'transport-udp' in asterisk_check.stdout
+
+  handlers:
+    - name: Restart Asterisk
+      ansible.builtin.systemd:
+        name: asterisk
+        state: restarted
+        daemon_reload: true
