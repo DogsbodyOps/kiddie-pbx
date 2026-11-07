@@ -14,9 +14,16 @@
           - vault_asterisk_extensions | length > 0
           - vault_asterisk_extensions | map(attribute='password') | select('search', 'CHANGE_ME') | list | length == 0
           - vault_asterisk_extensions | map(attribute='number') | map('string') | select('match', '^[0-9]{3}$') | list | length == vault_asterisk_extensions | length
+          - vault_cloudflare_dns_api_token is defined
+          - vault_cloudflare_dns_api_token != 'CHANGE_ME'
+          - asterisk_public_host is defined
+          - asterisk_certbot_email is defined
+          - "'example.com' not in asterisk_public_host"
+          - "'example.com' not in asterisk_certbot_email"
         fail_msg: >-
           Set up group_vars/asterisk/vault.yml from vault.example.yml, with a 3-digit
-          number and a real password for every extension.
+          number and a real password for every extension and a Cloudflare token. Set
+          asterisk_public_host and asterisk_certbot_email in inventory.ini.
         quiet: true
       no_log: true
 
@@ -34,8 +41,9 @@
       block:
         - name: Install the tools needed to start the build
           ansible.builtin.package:
-            name: [gcc, make, tar, gzip, bzip2, wget]
+            name: [gcc, make, tar, gzip, bzip2, wget, libssl-dev, libsrtp2-dev]
             state: present
+            update_cache: true
 
         - name: Download the source
           ansible.builtin.get_url:
@@ -129,6 +137,65 @@
         group: asterisk
         mode: "0750"
 
+    - name: Create the TLS key directory
+      ansible.builtin.file:
+        path: /etc/asterisk/keys
+        state: directory
+        owner: asterisk
+        group: asterisk
+        mode: "0750"
+
+    - name: Install certbot
+      ansible.builtin.package:
+        name: [certbot, python3-certbot-dns-cloudflare]
+        state: present
+
+    - name: Save the Cloudflare token for certbot
+      ansible.builtin.copy:
+        content: "dns_cloudflare_api_token = {{ vault_cloudflare_dns_api_token }}\n"
+        dest: /root/.cloudflare-certbot.ini
+        owner: root
+        group: root
+        mode: "0600"
+      diff: false
+      no_log: true
+
+    - name: Create the certbot deploy hook directory
+      ansible.builtin.file:
+        path: /etc/letsencrypt/renewal-hooks/deploy
+        state: directory
+        owner: root
+        group: root
+        mode: "0755"
+
+    - name: Install the certbot deploy hook
+      ansible.builtin.copy:
+        src: certbot-deploy-asterisk.sh
+        dest: /etc/letsencrypt/renewal-hooks/deploy/asterisk.sh
+        owner: root
+        group: root
+        mode: "0755"
+
+    - name: Request the TLS certificate
+      ansible.builtin.command:
+        cmd: >-
+          certbot certonly --non-interactive --agree-tos
+          --email {{ asterisk_certbot_email }}
+          --dns-cloudflare
+          --dns-cloudflare-credentials /root/.cloudflare-certbot.ini
+          --cert-name {{ asterisk_public_host }}
+          -d {{ asterisk_public_host }}
+        creates: "/etc/letsencrypt/live/{{ asterisk_public_host }}/fullchain.pem"
+
+    # Certbot only runs deploy hooks on renewal, so run it by hand for the first certificate.
+    - name: Copy the first certificate for Asterisk
+      ansible.builtin.command:
+        cmd: /etc/letsencrypt/renewal-hooks/deploy/asterisk.sh
+        creates: /etc/asterisk/keys/asterisk.crt
+      environment:
+        RENEWED_LINEAGE: "/etc/letsencrypt/live/{{ asterisk_public_host }}"
+      notify: Restart Asterisk
+
     - name: Deploy config files
       ansible.builtin.copy:
         src: asterisk/
@@ -176,14 +243,68 @@
     - name: Apply any pending restart
       ansible.builtin.meta: flush_handlers
 
-    - name: Check Asterisk answers and PJSIP has loaded
+    - name: Install fail2ban
+      ansible.builtin.package:
+        name: [fail2ban, nftables]
+        state: present
+
+    # The jail won't start if its log file is missing.
+    - name: Create the security log
+      ansible.builtin.copy:
+        content: ""
+        dest: /var/log/asterisk/security.log
+        owner: asterisk
+        group: asterisk
+        mode: "0640"
+        force: false
+
+    - name: Deploy the fail2ban jail
+      ansible.builtin.copy:
+        src: fail2ban-asterisk.conf
+        dest: /etc/fail2ban/jail.d/asterisk.conf
+        owner: root
+        group: root
+        mode: "0644"
+      notify: Restart fail2ban
+
+    - name: Enable and start fail2ban
+      ansible.builtin.systemd:
+        name: fail2ban
+        enabled: true
+        state: started
+
+    - name: Apply any pending fail2ban restart
+      ansible.builtin.meta: flush_handlers
+
+    - name: Check the fail2ban jail is running
+      ansible.builtin.command: fail2ban-client status asterisk
+      register: asterisk_fail2ban
+      changed_when: false
+      check_mode: false
+      retries: 6
+      delay: 5
+      until: asterisk_fail2ban.rc == 0
+
+    - name: Check the TLS transport has loaded
       ansible.builtin.command: asterisk -rx "pjsip show transports"
       register: asterisk_check
       changed_when: false
       check_mode: false
       retries: 6
       delay: 5
-      until: asterisk_check.rc == 0 and 'transport-udp' in asterisk_check.stdout
+      until: asterisk_check.rc == 0 and 'transport-tls' in asterisk_check.stdout
+
+    - name: Check SRTP has loaded
+      ansible.builtin.command: asterisk -rx "module show like res_srtp"
+      register: asterisk_srtp
+      changed_when: false
+      check_mode: false
+      failed_when: "'res_srtp.so' not in asterisk_srtp.stdout"
+
+    - name: Check Asterisk is listening for TLS
+      ansible.builtin.wait_for:
+        port: 5061
+        timeout: 30
 
   handlers:
     - name: Restart Asterisk
@@ -191,3 +312,8 @@
         name: asterisk
         state: restarted
         daemon_reload: true
+
+    - name: Restart fail2ban
+      ansible.builtin.systemd:
+        name: fail2ban
+        state: restarted

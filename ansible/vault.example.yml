@@ -5,6 +5,10 @@
 #
 # The first digit of each number sets the caller's ring category in extensions.conf:
 # 1 sibling, 2 parent, 3 grandparent.
+#
+# The Cloudflare token is used by certbot to prove ownership of the domain. Give it
+# only Zone:DNS:Edit permission on this zone.
+vault_cloudflare_dns_api_token: CHANGE_ME
 vault_asterisk_extensions:
   - number: "101"
     name: Child One

@@ -34,16 +34,25 @@ max_forwards=70                  ; SIP loop-prevention hop count, leave default
 ; ----------------------------------------------------------------------------
 ; TRANSPORT — how Asterisk listens for SIP signalling
 ; ----------------------------------------------------------------------------
-; UDP only, bound to all interfaces on the standard SIP port.
-; ASSUMPTION: this box lives on your home LAN and is NOT exposed to the
-; internet. If you ever port-forward 5060 to this box, come back and we
-; need to talk about TLS transport + fail2ban + strong auth passwords,
-; because an internet-facing PJSIP UDP endpoint with weak passwords is a
-; classic way to get your account used for toll fraud.
-[transport-udp]
+; TLS only: this box is exposed to the internet, so SIP is not offered over
+; plain UDP or TCP. The certificate is issued by certbot and copied to
+; /etc/asterisk/keys by its deploy hook.
+;
+; The VM sits behind a cloud public IP. local_net marks its private subnet, and
+; the external_* options tell Asterisk what to advertise to phones outside it.
+; Asterisk only rewrites addresses when local_net is set, so without it phones
+; are sent the private IP and calls have no audio.
+[transport-tls]
 type=transport
-protocol=udp
-bind=0.0.0.0:5060
+protocol=tls
+bind=0.0.0.0:5061
+cert_file=/etc/asterisk/keys/asterisk.crt
+priv_key_file=/etc/asterisk/keys/asterisk.key
+method=tlsv1_2
+local_net={{ ansible_facts.default_ipv4.network }}/{{ ansible_facts.default_ipv4.prefix }}
+external_media_address={{ asterisk_public_host }}
+external_signaling_address={{ asterisk_public_host }}
+external_signaling_port=5061
 
 
 ; ----------------------------------------------------------------------------
@@ -55,6 +64,9 @@ bind=0.0.0.0:5060
 type=endpoint
 context=internal                 ; which dialplan context handles calls FROM this endpoint
                                   ; (see extensions.conf)
+transport=transport-tls
+media_encryption=sdes            ; SRTP is required, so a phone that can't do it can't call.
+                                  ; Asterisk decrypts and re-encrypts audio on each call leg.
 disallow=all                     ; start from "no codecs allowed", then explicitly allow below
 allow=opus                       ; best quality-per-bit available — adaptive bitrate, genuinely
                                   ; better than G.711 while using LESS bandwidth. This is what

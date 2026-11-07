@@ -28,6 +28,12 @@ The `.bak` files on the server were not copied.
 | Change | Why |
 | --- | --- |
 | `RuntimeDirectory=asterisk` is on in the unit | `/var/run/asterisk` is lost at reboot otherwise |
+| SIP is TLS only on TCP 5061, with no UDP 5060 | The VM is on the internet |
+| Endpoints require SRTP, and `res_srtp` is built and loaded | The original build had no SRTP, so call audio was unencrypted |
+| Adds a Let's Encrypt certificate through certbot and Cloudflare DNS | TLS needs a certificate that renews itself |
+| Sets `local_net` and the `external_*` addresses | The VM is behind a public IP, and calls would have no audio otherwise |
+| Adds `rtp.conf` with RTP on UDP 10000-10199 | Gives the firewall rule a small, fixed range |
+| Adds fail2ban, plus `security.log` and `res_security_log` for it to read | Blocks password guessing against the public SIP port |
 | Enables the service | It is disabled on the server |
 | `/etc/asterisk` is 0750 and its files 0640 | SIP passwords were world-readable |
 | Ownership is set recursively | The original `chown` only covered top-level directories |
@@ -41,8 +47,16 @@ The playbook keeps these as they are on the server, so they still need a decisio
 with no `codec_opus`, and `allow=alaw` with no `codec_alaw.so` loaded.
 
 It does not open any firewall ports. The Azure VM's security group in Terraform only allows SSH,
-so phones cannot reach it until SIP and RTP rules are added. `pjsip.conf` is written on the
-assumption that it is not exposed to the internet, so plan for that before opening ports.
+so phones cannot reach it until these inbound rules are added:
+
+| Protocol | Ports | Purpose |
+| --- | --- | --- |
+| TCP | 5061 | SIP over TLS |
+| UDP | 10000-10199 | SRTP call audio |
+
+The `simple-vm` module in `tf-templates` defines its security group rules inline and does not
+output the group's name. Azure's provider doesn't support mixing inline and standalone rules, so
+the module needs a new input for extra rules, followed by a new release and a `ref` update here.
 
 ## What is installed
 
