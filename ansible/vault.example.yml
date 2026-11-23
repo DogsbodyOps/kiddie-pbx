@@ -11,11 +11,11 @@
 vault_cloudflare_dns_api_token: CHANGE_ME
 vault_asterisk_extensions:
   - number: "101"
-    name: Child One
+    name: Indigo
     password: CHANGE_ME
   - number: "102"
-    name: Child Two
+    name: Lyla
     password: CHANGE_ME
   - number: "201"
-    name: Parent
+    name: Nana Shell
     password: CHANGE_ME

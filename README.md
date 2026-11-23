@@ -11,11 +11,11 @@ It runs [Asterisk](https://www.asterisk.org/) on a small Azure VM. The system ha
 Not live yet. The target is Christmas 2026.
 
 - [x] Dialplan and SIP config, carried over from the prototype
-- [x] Terraform for the VM and DNS record
+- [x] tofu for the VM and DNS record
 - [x] Ansible playbook, written but not yet run on the target Ubuntu 24.04 VM
 - [x] PJSIP over TLS and SRTP config, written but not yet tested with a real call
 - [x] fail2ban config, written but not yet tested with a real failed login
-- [ ] Add the firewall rules to the `simple-vm` Terraform module (see [Connecting phones](#connecting-phones))
+- [ ] Add the firewall rules to the `simple-vm` tofu module (see [Connecting phones](#connecting-phones))
 - [ ] Confirm the handsets support TLS and SRTP, and trust the certificate
 - [ ] Set up the handsets and test them
 
@@ -48,7 +48,7 @@ Calls ring for 20 seconds, then the caller hears a busy or "didn't connect" tone
 
 | Path | Purpose |
 | --- | --- |
-| `terraform/` | Azure VM, resource group and Cloudflare DNS record |
+| `tofu/` | Azure VM, resource group and Cloudflare DNS record |
 | `ansible/deploy-asterisk.yml` | Builds Asterisk 22.11.0 from source, and sets up the config, TLS certificate and fail2ban |
 | `ansible/files/asterisk/` | Asterisk config, including the dialplan in `extensions.conf` |
 | `ansible/files/fail2ban-asterisk.conf` | fail2ban jail |
@@ -58,18 +58,18 @@ Calls ring for 20 seconds, then the caller hears a busy or "didn't connect" tone
 
 ## Deploying
 
-You'll need Terraform, Ansible, and access to Azure, Cloudflare and the Backblaze B2 bucket that holds the Terraform state.
+You'll need tofu, Ansible, and access to Azure, Cloudflare and the Backblaze B2 bucket that holds the tofu state.
 
 ### 1. Create the VM
 
 ```bash
-cd terraform
+cd tofu
 az login
 export CLOUDFLARE_API_TOKEN=...
-export AWS_ACCESS_KEY_ID=...        # Backblaze B2 key for the Terraform state
+export AWS_ACCESS_KEY_ID=...        # Backblaze B2 key for the tofu state
 export AWS_SECRET_ACCESS_KEY=...
-terraform init -backend-config=backend.tfbackend
-terraform apply
+tofu init -backend-config=backend.tfbackend
+tofu apply
 ```
 
 ### 2. Add the extensions and host
@@ -159,4 +159,4 @@ Other things to consider later:
 
 - `allow=opus` has no effect yet because `codec_opus` isn't built. Calls will use G.722 for now.
 - `allow=alaw` is listed, but `codec_alaw.so` isn't loaded, so alaw can't be transcoded.
-- The inbound SIP and audio rules aren't in Terraform yet, and the playbook doesn't manage firewall rules.
+- The inbound SIP and audio rules aren't in tofu yet, and the playbook doesn't manage firewall rules.

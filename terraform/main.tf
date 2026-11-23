@@ -23,6 +23,16 @@ variable "allowed_ssh_ips" {
   type = list(string)
 }
 
+variable "nsg_security_rules" {
+  type = map(object({
+    priority                = number
+    access                  = optional(string)
+    destination_port_ranges = list(string)
+    source_address_prefixes = list(string)
+  }))
+  default = {}
+}
+
 provider "azurerm" {
   features {}
   subscription_id = var.subscription_id
@@ -35,14 +45,15 @@ resource "azurerm_resource_group" "this" {
 }
 
 module "vm" {
-  source = "git::https://github.com/DogsbodyOps/tf-templates.git//azure/modules/simple-vm?ref=v1.0.0"
+  source = "git::https://github.com/DogsbodyOps/tf-templates.git//azure/modules/simple-vm?ref=v1.1.0"
 
-  name             = var.project
+  name                = var.project
   location            = azurerm_resource_group.this.location
   resource_group_name = azurerm_resource_group.this.name
   admin_username      = var.admin_username
   public_key          = var.public_key
   allowed_ssh_ips     = var.allowed_ssh_ips
+  nsg_security_rules  = var.nsg_security_rules
 }
 
 output "ssh" {

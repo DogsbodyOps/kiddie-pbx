@@ -25,7 +25,7 @@
           number and a real password for every extension and a Cloudflare token. Set
           asterisk_public_host and asterisk_certbot_email in inventory.ini.
         quiet: true
-      no_log: true
+      #no_log: true
 
     - name: Read the installed Asterisk version
       ansible.builtin.command: asterisk -V
