@@ -27,6 +27,7 @@ variable "nsg_security_rules" {
   type = map(object({
     priority                = number
     access                  = optional(string)
+    protocol                = optional(string)
     destination_port_ranges = list(string)
     source_address_prefixes = list(string)
   }))
@@ -45,7 +46,7 @@ resource "azurerm_resource_group" "this" {
 }
 
 module "vm" {
-  source = "git::https://github.com/DogsbodyOps/tf-templates.git//azure/modules/simple-vm?ref=v1.1.0"
+  source = "git::https://github.com/DogsbodyOps/tf-templates.git//azure/modules/simple-vm?ref=v1.1.1"
 
   name                = var.project
   location            = azurerm_resource_group.this.location

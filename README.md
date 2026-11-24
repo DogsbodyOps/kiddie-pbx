@@ -38,11 +38,24 @@ The first digit of an extension says who it belongs to. Asterisk sends that cate
 | `1XX` | Children | `family-sibling` |
 | `2XX` | Parents | `family-parent` |
 | `3XX` | Grandparents (planned) | `family-grandparent` |
-| `900` | Test line, plays "hello world" | |
+| `9XX` | Audio test lines (below) | |
 
 Any other caller sends `family-default`. A phone with no matching ringtone rule uses its normal ring.
 
 Calls ring for 20 seconds, then the caller hears a busy or "didn't connect" tone.
+
+#### Audio test lines
+
+Dial these from any registered handset to check audio.
+
+| Extension | What it does | Checks |
+| --- | --- | --- |
+| `900` | Plays "hello world" | You can hear the PBX |
+| `901` | Echo test: speak and hear yourself back (press `#` to exit) | Audio in both directions |
+| `902` | Continuous 1004 Hz tone | Levels and codec |
+| `903` | Reads your own extension number back | Caller ID, and that you can hear digits |
+
+If 900 connects but is silent, check SRTP/TLS settings, RTP ports and NAT, and that the Asterisk sound files are installed. If 901 only works one way, suspect RTP ports or the firewall. `pjsip set logger on` and `rtp set debug on` in the Asterisk CLI show what's happening.
 
 ## Repository layout
 
@@ -94,7 +107,7 @@ ansible-vault encrypt group_vars/asterisk/vault.yml
 ansible-playbook deploy-asterisk.yml --ask-vault-pass --ask-become-pass
 ```
 
-The first run compiles Asterisk and requests a Let's Encrypt certificate, so it takes a while, and the DNS record has to exist first. The playbook finishes by checking that Asterisk is listening for TLS and has loaded SRTP. Dial `900` from a registered handset to test audio.
+The first run compiles Asterisk and requests a Let's Encrypt certificate, so it takes a while, and the DNS record has to exist first. The playbook finishes by checking that Asterisk is listening for TLS and has loaded SRTP. Dial `900` from a registered handset to test audio (see [Audio test lines](#audio-test-lines)).
 
 ### Adding someone
 
@@ -133,6 +146,17 @@ Asterisk restarts when its certificate renews, about every 60 days, which drops 
 
 ## Roadmap
 
+### Handset provisioning
+
+A small sub-project to deploy the handset config. The Grandstream GHP611W config exported from a working phone is in `ansible/files/handset_config/` (`config.xml`, with UK call progress tones set). Still to do:
+
+- Host the config on a provisioning site (HTTPS, restricted access) and add it to the playbook or its own playbook
+- Template the per-handset values (extension, SIP credentials, display name) instead of one shared export
+- Use a config file per phone, named by MAC address, so each handset picks up its own settings
+- Point the handsets at the provisioning URL, so new phones configure themselves
+- Keep secrets out of the repo: check the exported files for passwords or tokens before committing, and keep credentials in the vault
+- Do the same for the Sipnetic app settings, if it can import a config
+
 ### Grandparents
 
 There are two ways to add them, and they can be mixed:
@@ -158,5 +182,4 @@ Other things to consider later:
 ## Known gaps
 
 - `allow=opus` has no effect yet because `codec_opus` isn't built. Calls will use G.722 for now.
-- `allow=alaw` is listed, but `codec_alaw.so` isn't loaded, so alaw can't be transcoded.
 - The inbound SIP and audio rules aren't in tofu yet, and the playbook doesn't manage firewall rules.

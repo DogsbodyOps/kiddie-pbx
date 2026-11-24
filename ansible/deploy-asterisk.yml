@@ -145,6 +145,20 @@
         group: asterisk
         mode: "0750"
 
+    # Must exist before the certbot deploy hook runs, because the hook calls systemctl try-restart.
+    - name: Deploy the systemd unit
+      ansible.builtin.copy:
+        src: asterisk.service
+        dest: /etc/systemd/system/asterisk.service
+        owner: root
+        group: root
+        mode: "0644"
+      notify: Restart Asterisk
+
+    - name: Reload systemd so it sees the Asterisk unit
+      ansible.builtin.systemd:
+        daemon_reload: true
+
     - name: Install certbot
       ansible.builtin.package:
         name: [certbot, python3-certbot-dns-cloudflare]
@@ -216,15 +230,6 @@
         backup: true
       diff: false
       no_log: true
-      notify: Restart Asterisk
-
-    - name: Deploy the systemd unit
-      ansible.builtin.copy:
-        src: asterisk.service
-        dest: /etc/systemd/system/asterisk.service
-        owner: root
-        group: root
-        mode: "0644"
       notify: Restart Asterisk
 
     - name: Let the asterisk user write rotated logs

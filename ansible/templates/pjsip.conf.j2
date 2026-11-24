@@ -68,7 +68,7 @@ transport=transport-tls
 media_encryption=sdes            ; SRTP is required, so a phone that can't do it can't call.
                                   ; Asterisk decrypts and re-encrypts audio on each call leg.
 disallow=all                     ; start from "no codecs allowed", then explicitly allow below
-allow=opus                       ; best quality-per-bit available — adaptive bitrate, genuinely
+#allow=opus                       ; best quality-per-bit available — adaptive bitrate, genuinely
                                   ; better than G.711 while using LESS bandwidth. This is what
                                   ; will matter most once calls are traversing the internet
                                   ; (Azure) rather than the LAN, where upload bandwidth is a
@@ -78,6 +78,7 @@ allow=g722                       ; "wideband" G.711 variant — same 64kbps as p
                                   ; noticeably clearer, especially on kids' higher-pitched voices.
                                   ; Zero bandwidth cost over what you're using now — pure upgrade.
 allow=alaw                       ; European PSTN-compatible fallback codec
+#allow=ulaw                       ; plain G.711 u-law — the one codec nearly every SIP phone supports
 dtmf_mode=rfc4733                ; DTMF (keypad tones) sent as RTP events, not audio —
                                   ; more reliable than in-band tones
 direct_media=no                  ; force RTP audio to always flow through Asterisk rather than

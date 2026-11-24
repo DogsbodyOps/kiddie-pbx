@@ -1,0 +1,1824 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gs_provision>
+	<config version="2">
+		<item name="network.port.eth.1.address">
+			<part name="2">168</part>
+			<part name="3">0</part>
+			<part name="4">160</part>
+			<part name="1">192</part>
+		</item>
+		<item name="energy">
+			<part name="masterControl">Default</part>
+		</item>
+		<item name="energySaving.nonOfficeHour">
+			<part name="mode">Default</part>
+		</item>
+		<item name="dateTime.format">
+			<part name="date">yyyy-mm-dd</part>
+			<part name="time">12Hour</part>
+		</item>
+		<item name="account.1.network">
+			<part name="dnsMode">ARecord</part>
+			<part name="supportRport">Yes</part>
+			<part name="dnsSRVFailoverMode">Default</part>
+			<part name="dnsSRVRegisterBeforeFailover">No</part>
+			<part name="natTraversal">No</part>
+			<part name="maxNumOfRetries">2</part>
+			<part name="failbackTimer">60</part>
+		</item>
+		<item name="account.1.ring">
+			<part name="ringtone">Ring2</part>
+			<part name="timeout">60</part>
+			<part name="ignoreSipAlertInfo">No</part>
+		</item>
+		<item name="account.1.call">
+			<part name="rejectAnonymousCall">No</part>
+			<part name="referToUseTargetContact">No</part>
+			<part name="callLog">0</part>
+			<part name="transferOnConferenceHangup">No</part>
+			<part name="dialplanBypass">mpk</part>
+			<part name="recoveryOnBlindTransfer">No</part>
+			<part name="onHoldReminderTone">Yes</part>
+			<part name="callWaiting">Default</part>
+			<part name="blindTransferTimeout">30</part>
+			<part name="earlyDial">No</part>
+			<part name="dialplan">{ x+ | \+x+ | *x+ | *xx*x+ }</part>
+			<part name="overrideForward">No</part>
+			<part name="sendAnonymous">No</part>
+			<part name="keyAsSend">Pound</part>
+			<part name="noKeyEntryTimeout">4</part>
+			<part name="autoAnswer">No</part>
+		</item>
+		<item name="network.port.eth.1.mask">
+			<part name="1">255</part>
+			<part name="2">255</part>
+			<part name="3">0</part>
+			<part name="4">0</part>
+		</item>
+		<item name="account.1.sip">
+			<part name="transport">Tls Or Tcp</part>
+			<part name="registrationFailureRetryWaitTime">20</part>
+			<part name="publishForPresence">No</part>
+			<part name="specialFeature">Standard</part>
+			<part name="lineSeizeTimeout">15</part>
+			<part name="callerIdDisplay">Header</part>
+			<part name="syncFeatureKey">No</part>
+			<part name="uriSchemeWhenUsingTls">sips</part>
+			<part name="registerBeforeExpiration">0</part>
+			<part name="useActualEphemeralPortInContactWithTcpTls">No</part>
+			<part name="authenticateIncomingInvite">No</part>
+			<part name="omitCharsetUtf8InMessage">No</part>
+			<part name="accountDisplay">User Name</part>
+			<part name="allowSipReset">No</part>
+			<part name="allowUnsolicitedRefer">Disabled</part>
+			<part name="listeningMode">Dual</part>
+			<part name="calleeIdDisplay">Auto</part>
+			<part name="minimumSE">90</part>
+			<part name="supportInstanceId">Yes</part>
+			<part name="subscribeFailureRetryWaitTime">1</part>
+			<part name="registration">Yes</part>
+			<part name="registerExpiration">60</part>
+			<part name="userid">101</part>
+			<part name="localPort">5061</part>
+			<part name="enableTCPKeepalive">Yes</part>
+			<part name="telUri">Disabled</part>
+			<part name="unregisterOnReboot">No</part>
+		</item>
+		<item name="audio.headset">
+			<part name="txGain">0</part>
+			<part name="rxGain">0</part>
+			<part name="keyMode">Default Mode</part>
+			<part name="type">Normal</part>
+		</item>
+		<item name="call.ipcall">
+			<part name="enable">No</part>
+			<part name="allowQuickDialing">0</part>
+			<part name="ringtone">Ring3</part>
+		</item>
+		<item name="call.conference">
+			<part name="enable">Yes</part>
+		</item>
+		<item name="account.1.audio">
+			<part name="jitterBufferLength">300ms</part>
+			<part name="jitterBufferType">Adaptive</part>
+			<part name="multipleMLineInSDP">No</part>
+			<part name="srtpMode">Optional</part>
+			<part name="cryptoLifeTime">Yes</part>
+			<part name="srtpKeyLength">AES128 And 256Bit</part>
+			<part name="symmetricRTP">No</part>
+			<part name="voiceFramePerTX">2</part>
+			<part name="silenceSuppression">No</part>
+			<part name="minJitterBufferLength">0</part>
+		</item>
+		<item name="pks.behavior.incall">
+			<part name="sendDtmfInstead">No</part>
+		</item>
+		<item name="call.transfer">
+			<part name="enable">Yes</part>
+			<part name="modeViaVpk">Blind Transfer</part>
+		</item>
+		<item name="account.1.sip.blf.callPickup">
+			<part name="prefix">**</part>
+			<part name="forcePrefix">Auto</part>
+		</item>
+		<item name="network.port.pc">
+			<part name="mode">Enabled</part>
+		</item>
+		<item name="security">
+			<part name="configurationViaKeypadMenu">Unrestricted</part>
+			<part name="webAccessMode">HTTPS</part>
+			<part name="webKeypadRestrictModeLockoutDuration">5</part>
+			<part name="webAccessControl">None</part>
+			<part name="ssh">Yes</part>
+		</item>
+		<item name="provisioning.config">
+			<part name="username">tNAb4YizBiMimzrkeZBg</part>
+			<part name="protocol">HTTPS</part>
+			<part name="serverPath">provision.yay.com/grandstream</part>
+			<part name="authenticateFile">No</part>
+		</item>
+		<item name="language">
+			<part name="gui">Automatic</part>
+		</item>
+		<item name="call.transfer.attended">
+			<part name="mode">Dynamic</part>
+		</item>
+		<item name="services.currency">
+			<part name="codes">EUR/USD;GBP/USD;CAD/USD;AUD/USD;CNY/USD;JPY/USD</part>
+			<part name="enable">Yes</part>
+		</item>
+		<item name="keys.lock">
+			<part name="enable">No</part>
+			<part name="timer">0</part>
+			<part name="emergency">112,911,110</part>
+		</item>
+		<item name="tr069">
+			<part name="saveCredentials">No</part>
+			<part name="autoLogin">No</part>
+			<part name="enable">Yes</part>
+			<part name="url">https://acsguestb.gdms.cloud</part>
+			<part name="periodicInform">Yes</part>
+			<part name="periodicInformInterval">86400</part>
+			<part name="connectionRequestUsername">EC74D7D7B9AC</part>
+			<part name="connectionRequestPort">7547</part>
+		</item>
+		<item name="maintain.syslog">
+			<part name="sendSipLog">No</part>
+			<part name="level">None</part>
+			<part name="protocol">UDP</part>
+			<part name="headerformat">Legacy</part>
+		</item>
+		<item name="account.1.featureCodes">
+			<part name="delayedCallForwardWaitTime">12</part>
+			<part name="callFeatures">No</part>
+			<part name="callRecordingDefaultStatus">Off</part>
+		</item>
+		<item name="services.stock">
+			<part name="enable">Yes</part>
+		</item>
+		<item name="sip">
+			<part name="escapeUrl">Yes</part>
+			<part name="delayRegistration">0</part>
+			<part name="showError">Yes</part>
+			<part name="keepAliveInterval">20</part>
+		</item>
+		<item name="sip.override.dhcp">
+			<part name="allowOption120">No</part>
+		</item>
+		<item name="provisioning">
+			<part name="3cxAutoProvision">No</part>
+			<part name="alwaysAuthenticateBeforeChallenge">No</part>
+			<part name="validateHostnameInCertificate">No</part>
+		</item>
+		<item name="network">
+			<part name="internetProtocol">BothAndPreferIPv4</part>
+			<part name="cdp">Yes</part>
+			<part name="mtu">1500</part>
+			<part name="showInternetDownWarning">No</part>
+		</item>
+		<item name="network.port.eth.1.ipv6">
+			<part name="type">Auto Configured</part>
+		</item>
+		<item name="network.port.eth.1.ipv6.static">
+			<part name="mode">Full Static</part>
+		</item>
+		<item name="dateTime.override.dhcp">
+			<part name="allowOption2">Yes</part>
+			<part name="allowOption42">Yes</part>
+		</item>
+		<item name="maintain">
+			<part name="autoRecover">Yes</part>
+			<part name="usbConsoleLog">No</part>
+		</item>
+		<item name="audio">
+			<part name="alwaysRingSpeaker">Yes</part>
+			<part name="groupListenwithHandset">No</part>
+		</item>
+		<item name="pks.mpk.19">
+			<part name="keyMode">None</part>
+			<part name="account">ActiveAccount</part>
+		</item>
+		<item name="pks.mpk.20">
+			<part name="keyMode">None</part>
+			<part name="account">ActiveAccount</part>
+		</item>
+		<item name="pks.mpk.21">
+			<part name="keyMode">None</part>
+			<part name="account">ActiveAccount</part>
+		</item>
+		<item name="provisioning.override.dhcp">
+			<part name="allowCommonOptions">Yes</part>
+			<part name="allowCustomOption">Option150</part>
+		</item>
+		<item name="pks.mpk.22">
+			<part name="keyMode">None</part>
+			<part name="account">ActiveAccount</part>
+		</item>
+		<item name="pks.mpk.23">
+			<part name="keyMode">None</part>
+			<part name="account">ActiveAccount</part>
+		</item>
+		<item name="network.dhcp">
+			<part name="hostName">Handset-Indigo</part>
+			<part name="vendorID">Grandstream GHP611W</part>
+			<part name="enableVlan">No</part>
+		</item>
+		<item name="pks.mpk.24">
+			<part name="keyMode">None</part>
+			<part name="account">ActiveAccount</part>
+		</item>
+		<item name="audio.handset">
+			<part name="txGain">0</part>
+			<part name="enableHAC">No</part>
+		</item>
+		<item name="call.dial.offhook">
+			<part name="timeout">30</part>
+			<part name="allowBarging">Yes</part>
+		</item>
+		<item name="account.1.ring.match.1">
+			<part name="ringtone">SystemRingtone</part>
+		</item>
+		<item name="account.1.ring.match.2">
+			<part name="ringtone">SystemRingtone</part>
+		</item>
+		<item name="account.1.ring.match.3">
+			<part name="ringtone">SystemRingtone</part>
+		</item>
+		<item name="account.2.ring.match.1">
+			<part name="ringtone">SystemRingtone</part>
+		</item>
+		<item name="account.2.ring.match.2">
+			<part name="ringtone">SystemRingtone</part>
+		</item>
+		<item name="account.2.ring.match.3">
+			<part name="ringtone">SystemRingtone</part>
+		</item>
+		<item name="account.3.ring.match.1">
+			<part name="ringtone">SystemRingtone</part>
+		</item>
+		<item name="account.3.ring.match.2">
+			<part name="ringtone">SystemRingtone</part>
+		</item>
+		<item name="account.3.ring.match.3">
+			<part name="ringtone">SystemRingtone</part>
+		</item>
+		<item name="audio.tone.callWaiting">
+			<part name="gain">Low</part>
+		</item>
+		<item name="network.qos">
+			<part name="forSip">26</part>
+			<part name="forRtp">46</part>
+		</item>
+		<item name="call.dial.clickToDial">
+			<part name="enable">No</part>
+		</item>
+		<item name="keys.custom.mute">
+			<part name="idle">Disabled</part>
+		</item>
+		<item name="multicast">
+			<part name="paginBarge">Disable</part>
+			<part name="pagingPriorityActive">Yes</part>
+			<part name="multicastPagingCodec">G.722</part>
+			<part name="allowedInDnd">No</part>
+			<part name="channel">0</part>
+		</item>
+		<item name="network.lldp">
+			<part name="enable">Yes</part>
+			<part name="txInterval">60</part>
+		</item>
+		<item name="network.port.eth.1.gateway">
+			<part name="1">0</part>
+			<part name="2">0</part>
+			<part name="3">0</part>
+			<part name="4">0</part>
+		</item>
+		<item name="call.callWaiting">
+			<part name="enableTone">Yes</part>
+			<part name="alwaysRing">0</part>
+			<part name="enable">Yes</part>
+		</item>
+		<item name="provisioning.firmware">
+			<part name="serverPath">firmware.grandstream.com</part>
+			<part name="checkCondition">AlwaysCheck</part>
+			<part name="protocol">HTTPS</part>
+		</item>
+		<item name="provisioning.auto">
+			<part name="minute">10080</part>
+			<part name="mode">YesUpgradeMin</part>
+			<part name="hour">1</part>
+			<part name="day">1</part>
+			<part name="endHour">0</part>
+		</item>
+		<item name="account.1.sip.timer">
+			<part name="t1">0.5sec</part>
+			<part name="t2">4sec</part>
+		</item>
+		<item name="network.dns.1.ip">
+			<part name="1">0</part>
+			<part name="2">0</part>
+			<part name="3">0</part>
+			<part name="4">0</part>
+		</item>
+		<item name="provisioning.pnp">
+			<part name="enable">No</part>
+		</item>
+		<item name="network.web.port">
+			<part name="http">80</part>
+			<part name="https">443</part>
+		</item>
+		<item name="call.dial.predictive">
+			<part name="enable">Yes</part>
+			<part name="source">LocalPhonebook,CallHistory,BSPhonebook,BSCallHistory,LDAPPhonebook,PersonalPhonebook,RemotePhonebook,FeatureCode</part>
+		</item>
+		<item name="callFeatures.displayVpkPage">
+			<part name="enable">No</part>
+		</item>
+		<item name="transfer.nontransfer.mpk">
+			<part name="enable">No</part>
+		</item>
+		<item name="network.port.eth.1.vlan">
+			<part name="enable">Yes</part>
+			<part name="tag">0</part>
+			<part name="priority">0</part>
+		</item>
+		<item name="callFeatures.eac">
+			<part name="enable">Yes</part>
+		</item>
+		<item name="multicast.paging.function">
+			<part name="enable">No</part>
+		</item>
+		<item name="externalService.1">
+			<part name="ringtone">Doorbell</part>
+			<part name="type">Others</part>
+			<part name="account">Account1</part>
+		</item>
+		<item name="externalService.2">
+			<part name="ringtone">Doorbell</part>
+			<part name="type">Others</part>
+			<part name="account">Account1</part>
+		</item>
+		<item name="externalService.3">
+			<part name="ringtone">Doorbell</part>
+			<part name="type">Others</part>
+			<part name="account">Account1</part>
+		</item>
+		<item name="externalService.4">
+			<part name="ringtone">Doorbell</part>
+			<part name="type">Others</part>
+			<part name="account">Account1</part>
+		</item>
+		<item name="externalService.5">
+			<part name="ringtone">Doorbell</part>
+			<part name="type">Others</part>
+			<part name="account">Account1</part>
+		</item>
+		<item name="externalService.6">
+			<part name="ringtone">Doorbell</part>
+			<part name="type">Others</part>
+			<part name="account">Account1</part>
+		</item>
+		<item name="externalService.7">
+			<part name="ringtone">Doorbell</part>
+			<part name="type">Others</part>
+			<part name="account">Account1</part>
+		</item>
+		<item name="externalService.8">
+			<part name="ringtone">Doorbell</part>
+			<part name="type">Others</part>
+			<part name="account">Account1</part>
+		</item>
+		<item name="externalService.9">
+			<part name="ringtone">Doorbell</part>
+			<part name="type">Others</part>
+			<part name="account">Account1</part>
+		</item>
+		<item name="externalService.10">
+			<part name="ringtone">Doorbell</part>
+			<part name="type">Others</part>
+			<part name="account">Account1</part>
+		</item>
+		<item name="security.minimum.TLS">
+			<part name="version">TLS_1_2</part>
+		</item>
+		<item name="security.maximum.TLS">
+			<part name="version">UNLIMITED</part>
+		</item>
+		<item name="dateTime.ntp">
+			<part name="enableAuth">No</part>
+			<part name="symmetricKeysID">1</part>
+			<part name="updateInterval">1440</part>
+		</item>
+		<item name="call.attenedConference">
+			<part name="enable">No</part>
+		</item>
+		<item name="ledControl">
+			<part name="lineLedColorScheme">Default</part>
+			<part name="mwiLedColorScheme">c=green,t=50/50/150-50/50/150;c=yellow,t=500/2500/500</part>
+			<part name="mwi">blinking</part>
+		</item>
+		<item name="network.dhcp.releaseOnReboot">
+			<part name="enable">No</part>
+		</item>
+		<item name="contact.source">
+			<part name="priority">Local,Remote,BSXSI,LDAPPhonebook,NETWorkSignaling</part>
+		</item>
+		<item name="call.disable.mute">
+			<part name="key">No</part>
+		</item>
+		<item name="sounds.warning">
+			<part name="enable">No</part>
+		</item>
+		<item name="keys.lock.state">
+			<part name="idle">NumberKeys,StarKey,PoundKey,VoicemailKey,MuteKey,HoldKey</part>
+			<part name="inCall">NumberKeys,StarKey,PoundKey,VoicemailKey,MuteKey,HoldKey</part>
+		</item>
+		<item name="hotel.room">
+			<part name="number">101</part>
+		</item>
+		<item name="ledControl.brightness">
+			<part name="active">10</part>
+			<part name="idle">0</part>
+		</item>
+		<item name="audio.handset.sidetone">
+			<part name="volume">15</part>
+		</item>
+		<item name="sounds.booting">
+			<part name="enable">No</part>
+		</item>
+		<item name="audio.tone.autoAnswer">
+			<part name="gain">medium</part>
+		</item>
+		<item name="ivr.basicSettings">
+			<part name="enable">Yes</part>
+		</item>
+		<item name="call.redial">
+			<part name="expiration">30</part>
+		</item>
+		<item name="accountSharing">
+			<part name="enable">No</part>
+			<part name="role">guest</part>
+			<part name="account">Account1</part>
+			<part name="groupName">AccountSharing</part>
+		</item>
+		<item name="accountSharing.accurateRinging">
+			<part name="enable">No</part>
+		</item>
+		<item name="accountSharing.SIPServer">
+			<part name="port">15060</part>
+		</item>
+		<item name="account.1.dtmf">
+			<part name="sendInAudio">No</part>
+			<part name="sendInRtp">Yes</part>
+			<part name="sendInSip">No</part>
+			<part name="delay">250</part>
+			<part name="InAudioVolume">18</part>
+		</item>
+		<item name="account.1.sip.outboundProxy">
+			<part name="mode">In Route</part>
+		</item>
+		<item name="account.1.sip.validate">
+			<part name="incomingMessage">No</part>
+			<part name="domainCertificates">Yes</part>
+			<part name="incomingServer">No</part>
+			<part name="certificationChain">No</part>
+			<part name="userIdforInvite">No</part>
+		</item>
+		<item name="account.1.sip.subscribe">
+			<part name="forRegistration">No</part>
+			<part name="expiration">60</part>
+			<part name="forMwi">No</part>
+		</item>
+		<item name="account.1.codec.g723.32">
+			<part name="packingMode">ITU</part>
+		</item>
+		<item name="account.1.sip.header">
+			<part name="privacy">Default</part>
+			<part name="ppi">Default</part>
+			<part name="authOnInitialRegister">No</part>
+			<part name="xGrandstream">Yes</part>
+			<part name="pani">Yes</part>
+			<part name="pei">Yes</part>
+			<part name="mac">No</part>
+			<part name="100rel">No</part>
+			<part name="macHeader">No</part>
+			<part name="authOnReRegister">Yes</part>
+		</item>
+		<item name="account.1.broadsoft">
+			<part name="callCenter">No</part>
+			<part name="hoteling">No</part>
+			<part name="callCenterStatus">No</part>
+			<part name="executiveAssistant">No</part>
+			<part name="callPark">Yes</part>
+		</item>
+		<item name="account.1.codec">
+			<part name="useFirstMatch">No</part>
+			<part name="hideLabel">No</part>
+			<part name="negotiatePriority">Callee</part>
+			<part name="g723rate">5.3kbps Encoding Rate</part>
+		</item>
+		<item name="account.1.codec.payloadType">
+			<part name="g72632">127</part>
+			<part name="opus">123</part>
+			<part name="red">124</part>
+			<part name="dtmf">101</part>
+			<part name="ilbc">97</part>
+		</item>
+		<item name="account.1.sip.blf.eventlist">
+			<part name="autoProvision">Disabled</part>
+		</item>
+		<item name="account.1.sip.sessionTimer">
+			<part name="enable">No</part>
+			<part name="expiration">180</part>
+			<part name="force">No</part>
+			<part name="forceInvite">No</part>
+		</item>
+		<item name="account.1.sip.keepAlive">
+			<part name="enable">No</part>
+			<part name="interval">30</part>
+			<part name="maxLost">3</part>
+		</item>
+		<item name="account.2.dtmf">
+			<part name="sendInAudio">No</part>
+			<part name="sendInRtp">Yes</part>
+			<part name="sendInSip">No</part>
+			<part name="delay">250</part>
+			<part name="InAudioVolume">18</part>
+		</item>
+		<item name="account.2.call">
+			<part name="transferOnConferenceHangup">No</part>
+			<part name="dialplanBypass">mpk</part>
+			<part name="recoveryOnBlindTransfer">No</part>
+			<part name="onHoldReminderTone">Yes</part>
+			<part name="callWaiting">Default</part>
+			<part name="blindTransferTimeout">30</part>
+			<part name="sendAnonymous">No</part>
+			<part name="earlyDial">No</part>
+			<part name="autoAnswer">No</part>
+			<part name="callLog">0</part>
+			<part name="rejectAnonymousCall">No</part>
+			<part name="dialplan">{ x+ | \+x+ | *x+ | *xx*x+ }</part>
+			<part name="referToUseTargetContact">No</part>
+			<part name="noKeyEntryTimeout">4</part>
+			<part name="keyAsSend">Pound</part>
+			<part name="overrideForward">No</part>
+		</item>
+		<item name="account.2.sip.outboundProxy">
+			<part name="mode">In Route</part>
+		</item>
+		<item name="account.2.sip.validate">
+			<part name="incomingMessage">No</part>
+			<part name="domainCertificates">No</part>
+			<part name="incomingServer">No</part>
+			<part name="certificationChain">No</part>
+			<part name="userIdforInvite">No</part>
+		</item>
+		<item name="account.2.sip">
+			<part name="lineSeizeTimeout">15</part>
+			<part name="callerIdDisplay">Header</part>
+			<part name="syncFeatureKey">No</part>
+			<part name="uriSchemeWhenUsingTls">sips</part>
+			<part name="registerBeforeExpiration">0</part>
+			<part name="useActualEphemeralPortInContactWithTcpTls">No</part>
+			<part name="authenticateIncomingInvite">No</part>
+			<part name="omitCharsetUtf8InMessage">No</part>
+			<part name="accountDisplay">User Name</part>
+			<part name="allowSipReset">No</part>
+			<part name="allowUnsolicitedRefer">Disabled</part>
+			<part name="listeningMode">Transport_Only</part>
+			<part name="calleeIdDisplay">Auto</part>
+			<part name="subscribeFailureRetryWaitTime">1</part>
+			<part name="telUri">Disabled</part>
+			<part name="registration">Yes</part>
+			<part name="unregisterOnReboot">No</part>
+			<part name="registerExpiration">60</part>
+			<part name="localPort">5062</part>
+			<part name="specialFeature">Standard</part>
+			<part name="minimumSE">90</part>
+			<part name="transport">UDP</part>
+			<part name="registrationFailureRetryWaitTime">20</part>
+			<part name="publishForPresence">No</part>
+			<part name="supportInstanceId">Yes</part>
+			<part name="enableTCPKeepalive">Yes</part>
+		</item>
+		<item name="account.2.sip.subscribe">
+			<part name="forRegistration">No</part>
+			<part name="expiration">60</part>
+			<part name="forMwi">No</part>
+		</item>
+		<item name="account.2.codec.g723.32">
+			<part name="packingMode">ITU</part>
+		</item>
+		<item name="account.2.sip.header">
+			<part name="privacy">Default</part>
+			<part name="ppi">Default</part>
+			<part name="authOnInitialRegister">No</part>
+			<part name="xGrandstream">Yes</part>
+			<part name="pani">Yes</part>
+			<part name="pei">Yes</part>
+			<part name="mac">No</part>
+			<part name="macHeader">No</part>
+			<part name="100rel">No</part>
+			<part name="authOnReRegister">Yes</part>
+		</item>
+		<item name="account.2.broadsoft">
+			<part name="callCenter">No</part>
+			<part name="hoteling">No</part>
+			<part name="callCenterStatus">No</part>
+			<part name="executiveAssistant">No</part>
+			<part name="callPark">No</part>
+		</item>
+		<item name="account.2.codec">
+			<part name="useFirstMatch">No</part>
+			<part name="hideLabel">No</part>
+			<part name="negotiatePriority">Callee</part>
+			<part name="g723rate">5.3kbps Encoding Rate</part>
+		</item>
+		<item name="dateTime.timezone">
+			<part name="custom">MTZ+6MDT+5,M4.1.0,M11.1.0</part>
+		</item>
+		<item name="account.2.audio">
+			<part name="cryptoLifeTime">Yes</part>
+			<part name="srtpKeyLength">AES128 And 256Bit</part>
+			<part name="srtpMode">Disabled</part>
+			<part name="symmetricRTP">No</part>
+			<part name="silenceSuppression">No</part>
+			<part name="voiceFramePerTX">2</part>
+			<part name="multipleMLineInSDP">No</part>
+			<part name="jitterBufferLength">300ms</part>
+			<part name="jitterBufferType">Adaptive</part>
+			<part name="minJitterBufferLength">0</part>
+		</item>
+		<item name="account.2.codec.payloadType">
+			<part name="g72632">127</part>
+			<part name="opus">123</part>
+			<part name="red">124</part>
+			<part name="ilbc">97</part>
+			<part name="dtmf">101</part>
+		</item>
+		<item name="account.2.sip.blf.eventlist">
+			<part name="autoProvision">Disabled</part>
+		</item>
+		<item name="account.2.sip.sessionTimer">
+			<part name="enable">No</part>
+			<part name="force">No</part>
+			<part name="forceInvite">No</part>
+			<part name="expiration">180</part>
+		</item>
+		<item name="account.2.sip.keepAlive">
+			<part name="enable">No</part>
+			<part name="interval">30</part>
+			<part name="maxLost">3</part>
+		</item>
+		<item name="network.dns.2.ip">
+			<part name="1">0</part>
+			<part name="2">0</part>
+			<part name="3">0</part>
+			<part name="4">0</part>
+		</item>
+		<item name="account.3.dtmf">
+			<part name="sendInAudio">No</part>
+			<part name="sendInRtp">Yes</part>
+			<part name="sendInSip">No</part>
+			<part name="delay">250</part>
+			<part name="InAudioVolume">18</part>
+		</item>
+		<item name="account.3.call">
+			<part name="transferOnConferenceHangup">No</part>
+			<part name="dialplanBypass">mpk</part>
+			<part name="recoveryOnBlindTransfer">No</part>
+			<part name="onHoldReminderTone">Yes</part>
+			<part name="callWaiting">Default</part>
+			<part name="blindTransferTimeout">30</part>
+			<part name="sendAnonymous">No</part>
+			<part name="earlyDial">No</part>
+			<part name="autoAnswer">No</part>
+			<part name="callLog">0</part>
+			<part name="rejectAnonymousCall">No</part>
+			<part name="dialplan">{ x+ | \+x+ | *x+ | *xx*x+ }</part>
+			<part name="referToUseTargetContact">No</part>
+			<part name="noKeyEntryTimeout">4</part>
+			<part name="keyAsSend">Pound</part>
+		</item>
+		<item name="account.3.sip.outboundProxy">
+			<part name="mode">In Route</part>
+		</item>
+		<item name="account.3.sip.validate">
+			<part name="incomingMessage">No</part>
+			<part name="domainCertificates">No</part>
+			<part name="incomingServer">No</part>
+			<part name="certificationChain">No</part>
+			<part name="userIdforInvite">No</part>
+		</item>
+		<item name="account.3.sip">
+			<part name="lineSeizeTimeout">15</part>
+			<part name="callerIdDisplay">Header</part>
+			<part name="syncFeatureKey">No</part>
+			<part name="uriSchemeWhenUsingTls">sips</part>
+			<part name="registerBeforeExpiration">0</part>
+			<part name="useActualEphemeralPortInContactWithTcpTls">No</part>
+			<part name="authenticateIncomingInvite">No</part>
+			<part name="omitCharsetUtf8InMessage">No</part>
+			<part name="accountDisplay">User Name</part>
+			<part name="allowSipReset">No</part>
+			<part name="allowUnsolicitedRefer">Disabled</part>
+			<part name="listeningMode">Transport_Only</part>
+			<part name="calleeIdDisplay">Auto</part>
+			<part name="subscribeFailureRetryWaitTime">1</part>
+			<part name="telUri">Disabled</part>
+			<part name="registration">Yes</part>
+			<part name="unregisterOnReboot">No</part>
+			<part name="registerExpiration">60</part>
+			<part name="localPort">5064</part>
+			<part name="specialFeature">Standard</part>
+			<part name="minimumSE">90</part>
+			<part name="transport">UDP</part>
+			<part name="registrationFailureRetryWaitTime">20</part>
+			<part name="publishForPresence">No</part>
+			<part name="supportInstanceId">Yes</part>
+			<part name="enableTCPKeepalive">Yes</part>
+		</item>
+		<item name="account.3.sip.subscribe">
+			<part name="forRegistration">No</part>
+			<part name="expiration">60</part>
+			<part name="forMwi">No</part>
+		</item>
+		<item name="account.3.codec.g723.32">
+			<part name="packingMode">ITU</part>
+		</item>
+		<item name="ivr">
+			<part name="enable">Yes</part>
+		</item>
+		<item name="account.3.sip.header">
+			<part name="privacy">Default</part>
+			<part name="ppi">Default</part>
+			<part name="authOnInitialRegister">No</part>
+			<part name="xGrandstream">Yes</part>
+			<part name="pani">Yes</part>
+			<part name="pei">Yes</part>
+			<part name="mac">No</part>
+			<part name="macHeader">No</part>
+			<part name="100rel">No</part>
+			<part name="authOnReRegister">Yes</part>
+		</item>
+		<item name="account.3.broadsoft">
+			<part name="callCenter">No</part>
+			<part name="hoteling">No</part>
+			<part name="callCenterStatus">No</part>
+			<part name="executiveAssistant">No</part>
+			<part name="callPark">No</part>
+		</item>
+		<item name="network.wifi">
+			<part name="band">Auto</part>
+			<part name="enable">On</part>
+		</item>
+		<item name="account.3.codec">
+			<part name="useFirstMatch">No</part>
+			<part name="hideLabel">No</part>
+			<part name="negotiatePriority">Callee</part>
+			<part name="g723rate">5.3kbps Encoding Rate</part>
+		</item>
+		<item name="account.3.audio">
+			<part name="cryptoLifeTime">Yes</part>
+			<part name="srtpKeyLength">AES128 And 256Bit</part>
+			<part name="srtpMode">Disabled</part>
+			<part name="symmetricRTP">No</part>
+			<part name="silenceSuppression">No</part>
+			<part name="voiceFramePerTX">2</part>
+			<part name="multipleMLineInSDP">No</part>
+			<part name="jitterBufferLength">300ms</part>
+			<part name="jitterBufferType">Adaptive</part>
+			<part name="minJitterBufferLength">0</part>
+		</item>
+		<item name="account.3.codec.payloadType">
+			<part name="g72632">127</part>
+			<part name="opus">123</part>
+			<part name="red">124</part>
+			<part name="ilbc">97</part>
+			<part name="dtmf">101</part>
+		</item>
+		<item name="account.3.sip.blf.eventlist">
+			<part name="autoProvision">Disabled</part>
+		</item>
+		<item name="account.3.sip.sessionTimer">
+			<part name="enable">No</part>
+			<part name="force">No</part>
+			<part name="forceInvite">No</part>
+			<part name="expiration">180</part>
+		</item>
+		<item name="account.3.sip.keepAlive">
+			<part name="enable">No</part>
+			<part name="interval">30</part>
+			<part name="maxLost">3</part>
+		</item>
+		<item name="account.1.sip.registration">
+			<part name="403RetryWaitTime">1200</part>
+		</item>
+		<item name="account.1.intercom">
+			<part name="allowBargingByCallInfo">No</part>
+			<part name="muteOnAnswerIntercom">No</part>
+			<part name="playWarningToneForAutoAnswer">Yes</part>
+			<part name="allowAutoAnswer">Yes</part>
+		</item>
+		<item name="account.1.rtp">
+			<part name="filter">Disable</part>
+			<part name="timeout">0</part>
+			<part name="keepAliveMethod">RTPVersion1</part>
+		</item>
+		<item name="account.1.call.hideRemoteUserId">
+			<part name="callType">NoneOfCalls</part>
+			<part name="length">0</part>
+			<part name="syntax">{ x+(xxxx)xxxx | xx(xx+)xx | x(xx+)x | x(x+) | (x+)}</part>
+		</item>
+		<item name="account.1.call.hidePassword">
+			<part name="length">0</part>
+		</item>
+		<item name="features.im">
+			<part name="popupTimeout">10</part>
+			<part name="playToneOnNew">No</part>
+		</item>
+		<item name="account.1.call.rfc2543Hold">
+			<part name="enable">No</part>
+		</item>
+		<item name="account.1.ring.match.7">
+			<part name="ringtone">SystemRingtone</part>
+		</item>
+		<item name="account.1.ring.match.8">
+			<part name="ringtone">SystemRingtone</part>
+		</item>
+		<item name="account.1.ring.match.9">
+			<part name="ringtone">SystemRingtone</part>
+		</item>
+		<item name="account.1.audio.fec">
+			<part name="enable">Yes</part>
+		</item>
+		<item name="account.1.codec.payloadType.fec">
+			<part name="audio">121</part>
+		</item>
+		<item name="account.1.network.sbc">
+			<part name="enable">No</part>
+		</item>
+		<item name="account.1.network.switchBackupProxy">
+			<part name="enable">No</part>
+		</item>
+		<item name="account.1.audio.report.collector">
+			<part name="port">5060</part>
+		</item>
+		<item name="account.1.ring.match.10">
+			<part name="ringtone">SystemRingtone</part>
+		</item>
+		<item name="account.2.sip.registration">
+			<part name="403RetryWaitTime">1200</part>
+		</item>
+		<item name="account.2.ring">
+			<part name="ignoreSipAlertInfo">No</part>
+			<part name="ringtone">Ring5</part>
+			<part name="timeout">60</part>
+		</item>
+		<item name="account.2.intercom">
+			<part name="allowBargingByCallInfo">No</part>
+			<part name="muteOnAnswerIntercom">No</part>
+			<part name="playWarningToneForAutoAnswer">Yes</part>
+			<part name="allowAutoAnswer">Yes</part>
+		</item>
+		<item name="account.2.rtp">
+			<part name="filter">Disable</part>
+			<part name="timeout">0</part>
+			<part name="keepAliveMethod">RTPVersion1</part>
+		</item>
+		<item name="account.2.network">
+			<part name="dnsSRVFailoverMode">Default</part>
+			<part name="dnsSRVRegisterBeforeFailover">No</part>
+			<part name="dnsMode">ARecord</part>
+			<part name="natTraversal">No</part>
+			<part name="supportRport">Yes</part>
+			<part name="maxNumOfRetries">2</part>
+			<part name="failbackTimer">60</part>
+		</item>
+		<item name="account.2.call.hideRemoteUserId">
+			<part name="callType">NoneOfCalls</part>
+			<part name="length">0</part>
+			<part name="syntax">{ x+(xxxx)xxxx | xx(xx+)xx | x(xx+)x | x(x+) | (x+)}</part>
+		</item>
+		<item name="account.2.call.hidePassword">
+			<part name="length">0</part>
+		</item>
+		<item name="account.2.call.rfc2543Hold">
+			<part name="enable">No</part>
+		</item>
+		<item name="account.2.ring.match.7">
+			<part name="ringtone">SystemRingtone</part>
+		</item>
+		<item name="account.2.ring.match.8">
+			<part name="ringtone">SystemRingtone</part>
+		</item>
+		<item name="account.2.ring.match.9">
+			<part name="ringtone">SystemRingtone</part>
+		</item>
+		<item name="account.2.audio.fec">
+			<part name="enable">Yes</part>
+		</item>
+		<item name="account.2.codec.payloadType.fec">
+			<part name="audio">121</part>
+		</item>
+		<item name="account.2.network.sbc">
+			<part name="enable">No</part>
+		</item>
+		<item name="account.2.network.switchBackupProxy">
+			<part name="enable">No</part>
+		</item>
+		<item name="account.2.audio.report.collector">
+			<part name="port">5060</part>
+		</item>
+		<item name="account.2.ring.match.10">
+			<part name="ringtone">SystemRingtone</part>
+		</item>
+		<item name="account.1.sip.sessionTimer.requestTimer">
+			<part name="caller">No</part>
+			<part name="callee">No</part>
+		</item>
+		<item name="account.3.sip.registration">
+			<part name="403RetryWaitTime">1200</part>
+		</item>
+		<item name="account.3.ring">
+			<part name="ignoreSipAlertInfo">No</part>
+			<part name="ringtone">Ring5</part>
+			<part name="timeout">60</part>
+		</item>
+		<item name="account.3.intercom">
+			<part name="allowBargingByCallInfo">No</part>
+			<part name="muteOnAnswerIntercom">No</part>
+			<part name="playWarningToneForAutoAnswer">Yes</part>
+			<part name="allowAutoAnswer">Yes</part>
+		</item>
+		<item name="account.3.rtp">
+			<part name="filter">Disable</part>
+			<part name="timeout">0</part>
+			<part name="keepAliveMethod">RTPVersion1</part>
+		</item>
+		<item name="account.3.network">
+			<part name="dnsSRVFailoverMode">Default</part>
+			<part name="dnsMode">ARecord</part>
+			<part name="natTraversal">No</part>
+			<part name="supportRport">Yes</part>
+			<part name="maxNumOfRetries">2</part>
+			<part name="failbackTimer">60</part>
+		</item>
+		<item name="account.3.call.hideRemoteUserId">
+			<part name="callType">NoneOfCalls</part>
+			<part name="length">0</part>
+			<part name="syntax">{ x+(xxxx)xxxx | xx(xx+)xx | x(xx+)x | x(x+) | (x+)}</part>
+		</item>
+		<item name="account.3.call.hidePassword">
+			<part name="length">0</part>
+		</item>
+		<item name="account.3.call.rfc2543Hold">
+			<part name="enable">No</part>
+		</item>
+		<item name="account.3.ring.match.7">
+			<part name="ringtone">SystemRingtone</part>
+		</item>
+		<item name="account.3.ring.match.8">
+			<part name="ringtone">SystemRingtone</part>
+		</item>
+		<item name="account.3.ring.match.9">
+			<part name="ringtone">SystemRingtone</part>
+		</item>
+		<item name="account.3.audio.fec">
+			<part name="enable">Yes</part>
+		</item>
+		<item name="account.3.codec.payloadType.fec">
+			<part name="audio">121</part>
+		</item>
+		<item name="account.3.network.sbc">
+			<part name="enable">No</part>
+		</item>
+		<item name="account.3.network.switchBackupProxy">
+			<part name="enable">No</part>
+		</item>
+		<item name="account.3.audio.report.collector">
+			<part name="port">5060</part>
+		</item>
+		<item name="account.3.ring.match.10">
+			<part name="ringtone">SystemRingtone</part>
+		</item>
+		<item name="account.1.sip.sessionTimer.refresher">
+			<part name="uacSpecify">UAC</part>
+			<part name="uasSpecify">UAC</part>
+		</item>
+		<item name="account.1">
+			<part name="name">Test01</part>
+			<part name="enable">Yes</part>
+		</item>
+		<item name="security.ssh">
+			<part name="port">22</part>
+		</item>
+		<item name="security.webAccess.session">
+			<part name="timeout">10</part>
+		</item>
+		<item name="security.webAccess">
+			<part name="attemptLimit">5</part>
+		</item>
+		<item name="network.dns">
+			<part name="failureCacheDuration">0</part>
+			<part name="refreshTime">0</part>
+		</item>
+		<item name="audio.tone">
+			<part name="secondDial">f1=350,f2=440;</part>
+			<part name="dial">f1=350,f2=440;</part>
+			<part name="message">f1=350,f2=440,c=75/75;</part>
+			<part name="systemRing">f1=400,f2=450,c=40/20-40/200;</part>
+			<part name="ringBack">f1=400,f2=450,c=40/20-40/200;</part>
+			<part name="callWaiting">f1=400,f2=400,c=10/400;</part>
+			<part name="busy">f1=400,f2=400,c=38/38;</part>
+			<part name="reorder">f1=400,f2=400,c=40/35-22/52;</part>
+		</item>
+		<item name="lcd.wallpaper">
+			<part name="source">Default</part>
+			<part name="color">#000000</part>
+		</item>
+		<item name="account.2.featureCodes">
+			<part name="callRecordingDefaultStatus">Off</part>
+			<part name="callFeatures">No</part>
+			<part name="delayedCallForwardWaitTime">12</part>
+		</item>
+		<item name="lcd.screensaver">
+			<part name="enable">OnIfNoVPKIsActive</part>
+			<part name="timeout">3</part>
+			<part name="showDateTime">Yes</part>
+			<part name="downloadXmlInterval">0</part>
+		</item>
+		<item name="softkeys.layout">
+			<part name="enable">No</part>
+			<part name="enforcePosition">No</part>
+		</item>
+		<item name="softkeys.layout.state">
+			<part name="inDialing">EndCall,Backspace,Dial,Custom-Contacts,Custom-History</part>
+			<part name="InRinging">Answer,Reject,Forward,Custom-Silence</part>
+			<part name="inCalling">EndCall,ConfCall</part>
+			<part name="inCallConnected">EndCall,ConfCall,NewCall,Swap,Transfer,Record,Custom-Hold,Custom-NoiseShield,DialDTMF</part>
+			<part name="inOnhold">EndCall,Resume,NewCall,ConfCall,Swap,Transfer</part>
+			<part name="inCallFailed">EndCall,Redial</part>
+			<part name="inTransfer">Cancel,Backspace,Transfer,Custom-Contacts,Custom-History</part>
+			<part name="inConference">Cancel,Dial,Backspace,Custom-Contacts,Custom-History</part>
+			<part name="inConferenceConnected">EndCall,ConfRoom,Custom-Hold,Add,Custom-NoiseShield</part>
+			<part name="inOnhookDialing">EndCall,Backspace,Dial,Custom-Contacts,Custom-History</part>
+		</item>
+		<item name="account.3.featureCodes">
+			<part name="callRecordingDefaultStatus">Off</part>
+			<part name="callFeatures">No</part>
+			<part name="delayedCallForwardWaitTime">12</part>
+		</item>
+		<item name="softkeys">
+			<part name="moreKeyDisplayMode">Menu</part>
+		</item>
+		<item name="lcd.mpk">
+			<part name="wallpaperSource">Default</part>
+			<part name="displayOrder">Sequential</part>
+			<part name="contact">No</part>
+		</item>
+		<item name="softkey.idleLayout">
+			<part name="enable">No</part>
+		</item>
+		<item name="network.rtp.local">
+			<part name="maxPort">5204</part>
+			<part name="portRange">200</part>
+			<part name="port">5004</part>
+		</item>
+		<item name="callFeatures">
+			<part name="allowIncomingCallBeforeRinging">No</part>
+			<part name="lastCallForwardAll">No</part>
+			<part name="savedLocalCallRecordingLocation">InternalStorage</part>
+			<part name="hookSwitch">No</part>
+			<part name="activeMPKPage">Yes</part>
+		</item>
+		<item name="call.dial">
+			<part name="preferredAccount">Account1</part>
+		</item>
+		<item name="account.1.sip.subscriber">
+			<part name="name">LivingRoom</part>
+			<part name="userid">101</part>
+		</item>
+		<item name="dateTime.ntp.server">
+			<part name="1">pool.ntp.org</part>
+		</item>
+		<item name="pks.mpk.1">
+			<part name="account">ActiveAccount</part>
+			<part name="keyMode">None</part>
+		</item>
+		<item name="pks.mpk.2">
+			<part name="account">ActiveAccount</part>
+			<part name="keyMode">None</part>
+		</item>
+		<item name="pks.mpk.3">
+			<part name="account">ActiveAccount</part>
+			<part name="keyMode">None</part>
+		</item>
+		<item name="pks.mpk.4">
+			<part name="account">ActiveAccount</part>
+			<part name="keyMode">None</part>
+		</item>
+		<item name="pks.mpk.5">
+			<part name="account">ActiveAccount</part>
+			<part name="keyMode">None</part>
+		</item>
+		<item name="pks.mpk.6">
+			<part name="account">ActiveAccount</part>
+			<part name="keyMode">None</part>
+		</item>
+		<item name="pks.mpk.7">
+			<part name="account">ActiveAccount</part>
+			<part name="keyMode">None</part>
+		</item>
+		<item name="remoteControl">
+			<part name="enable">Yes</part>
+		</item>
+		<item name="remoteControl.confirmWindow">
+			<part name="enable">No</part>
+		</item>
+		<item name="remoteControl.csta">
+			<part name="enable">No</part>
+		</item>
+		<item name="services.autoLocation.autoUpdate">
+			<part name="enable">Yes</part>
+		</item>
+		<item name="ons">
+			<part name="enable">Yes</part>
+		</item>
+		<item name="lcd.backlight.brightness">
+			<part name="active">8</part>
+			<part name="idle">1</part>
+		</item>
+		<item name="call.display">
+			<part name="dtmfInCall">Yes</part>
+		</item>
+		<item name="lcd.backlight">
+			<part name="missedCall">Yes</part>
+			<part name="activeTimeout">1</part>
+		</item>
+		<item name="xmlApplication">
+			<part name="softkeyLabel">XMLApp</part>
+		</item>
+		<item name="pks.mpk.8">
+			<part name="keyMode">None</part>
+			<part name="account">ActiveAccount</part>
+		</item>
+		<item name="pks.mpk.9">
+			<part name="keyMode">None</part>
+			<part name="account">ActiveAccount</part>
+		</item>
+		<item name="pks.mpk.10">
+			<part name="keyMode">None</part>
+			<part name="account">ActiveAccount</part>
+		</item>
+		<item name="pks.mpk.11">
+			<part name="keyMode">None</part>
+			<part name="account">ActiveAccount</part>
+		</item>
+		<item name="pks.mpk.12">
+			<part name="keyMode">None</part>
+			<part name="account">ActiveAccount</part>
+		</item>
+		<item name="pks.mpk.13">
+			<part name="keyMode">None</part>
+			<part name="account">ActiveAccount</part>
+		</item>
+		<item name="pks.mpk.14">
+			<part name="keyMode">None</part>
+			<part name="account">ActiveAccount</part>
+		</item>
+		<item name="pks.mpk.15">
+			<part name="keyMode">None</part>
+			<part name="account">ActiveAccount</part>
+		</item>
+		<item name="pks.mpk.16">
+			<part name="keyMode">None</part>
+			<part name="account">ActiveAccount</part>
+		</item>
+		<item name="pks.mpk.17">
+			<part name="keyMode">None</part>
+			<part name="account">ActiveAccount</part>
+		</item>
+		<item name="pks.mpk.18">
+			<part name="keyMode">None</part>
+			<part name="account">ActiveAccount</part>
+		</item>
+		<item name="account.2">
+			<part name="enable">No</part>
+		</item>
+		<item name="account.2.sip.sessionTimer.requestTimer">
+			<part name="caller">No</part>
+			<part name="callee">No</part>
+		</item>
+		<item name="account.2.sip.sessionTimer.refresher">
+			<part name="uacSpecify">UAC</part>
+			<part name="uasSpecify">UAC</part>
+		</item>
+		<item name="account.2.sip.timer">
+			<part name="t1">0.5sec</part>
+			<part name="t2">4sec</part>
+		</item>
+		<item name="sip.notify">
+			<part name="challenge">Yes</part>
+		</item>
+		<item name="account.2.codec.choice">
+			<part name="1">G.722</part>
+			<part name="2">OPUS</part>
+			<part name="3">PCMU</part>
+			<part name="4">PCMA</part>
+			<part name="5">G.723.1</part>
+			<part name="6">G.729A/B</part>
+			<part name="7">iLBC</part>
+			<part name="8">G.726-32</part>
+		</item>
+		<item name="account.1.codec.choice">
+			<part name="7">PCMA</part>
+			<part name="1">G.722</part>
+			<part name="2">PCMA</part>
+			<part name="3">PCMA</part>
+			<part name="4">PCMA</part>
+			<part name="5">PCMA</part>
+			<part name="6">PCMA</part>
+			<part name="8">PCMA</part>
+		</item>
+		<item name="account.1.sip.server.1">
+			<part name="address">kiddie-pbx.17042021.xyz</part>
+		</item>
+		<item name="account.2.sip.blf.callPickup">
+			<part name="prefix">**</part>
+			<part name="forcePrefix">Auto</part>
+		</item>
+		<item name="account.2.codec.iLBC">
+			<part name="frameSize">30ms</part>
+		</item>
+		<item name="account.3">
+			<part name="enable">No</part>
+		</item>
+		<item name="account.3.sip.sessionTimer.requestTimer">
+			<part name="caller">No</part>
+			<part name="callee">No</part>
+		</item>
+		<item name="account.3.sip.sessionTimer.refresher">
+			<part name="uacSpecify">UAC</part>
+			<part name="uasSpecify">UAC</part>
+		</item>
+		<item name="account.3.sip.timer">
+			<part name="t1">0.5sec</part>
+			<part name="t2">4sec</part>
+		</item>
+		<item name="account.3.codec.choice">
+			<part name="1">G.722</part>
+			<part name="2">OPUS</part>
+			<part name="3">PCMU</part>
+			<part name="4">PCMA</part>
+			<part name="5">G.723.1</part>
+			<part name="6">G.729A/B</part>
+			<part name="7">iLBC</part>
+			<part name="8">G.726-32</part>
+		</item>
+		<item name="account.3.sip.blf.callPickup">
+			<part name="prefix">**</part>
+			<part name="forcePrefix">Auto</part>
+		</item>
+		<item name="account.3.codec.iLBC">
+			<part name="frameSize">30ms</part>
+		</item>
+		<item name="account.1.sip.notify">
+			<part name="route">Yes</part>
+		</item>
+		<item name="account.1.rtcp.port">
+			<part name="selection">Default</part>
+		</item>
+		<item name="account.1.rtcp">
+			<part name="keepAliveMethod">ReceiverReport</part>
+		</item>
+		<item name="maintain.packetCapture">
+			<part name="includeRtp">No</part>
+		</item>
+		<item name="packetCapture">
+			<part name="usbFilename">0</part>
+		</item>
+		<item name="account.2.sip.notify">
+			<part name="route">Yes</part>
+		</item>
+		<item name="account.2.rtcp.port">
+			<part name="selection">Default</part>
+		</item>
+		<item name="account.2.rtcp">
+			<part name="keepAliveMethod">ReceiverReport</part>
+		</item>
+		<item name="account.3.sip.notify">
+			<part name="route">Yes</part>
+		</item>
+		<item name="account.3.rtcp.port">
+			<part name="selection">Default</part>
+		</item>
+		<item name="account.3.rtcp">
+			<part name="keepAliveMethod">ReceiverReport</part>
+		</item>
+		<item name="account.4.dtmf">
+			<part name="InAudioVolume">18</part>
+		</item>
+		<item name="account.5.dtmf">
+			<part name="InAudioVolume">18</part>
+		</item>
+		<item name="account.6.dtmf">
+			<part name="InAudioVolume">18</part>
+		</item>
+		<item name="dateTime">
+			<part name="timezone">Automatic</part>
+			<part name="showOnStatusBar">Yes</part>
+		</item>
+		<item name="account.1.ring.match.4">
+			<part name="ringtone">SystemRingtone</part>
+		</item>
+		<item name="account.1.ring.match.5">
+			<part name="ringtone">SystemRingtone</part>
+		</item>
+		<item name="account.1.ring.match.6">
+			<part name="ringtone">SystemRingtone</part>
+		</item>
+		<item name="account.2.ring.match.4">
+			<part name="ringtone">SystemRingtone</part>
+		</item>
+		<item name="account.2.ring.match.5">
+			<part name="ringtone">SystemRingtone</part>
+		</item>
+		<item name="account.2.ring.match.6">
+			<part name="ringtone">SystemRingtone</part>
+		</item>
+		<item name="account.3.ring.match.4">
+			<part name="ringtone">SystemRingtone</part>
+		</item>
+		<item name="account.3.ring.match.5">
+			<part name="ringtone">SystemRingtone</part>
+		</item>
+		<item name="account.3.ring.match.6">
+			<part name="ringtone">SystemRingtone</part>
+		</item>
+		<item name="call.dialPlan">
+			<part name="allowBypassFromDirectories">No</part>
+		</item>
+		<item name="call.recording.local">
+			<part name="enable">No</part>
+		</item>
+		<item name="call.disconnect.remote">
+			<part name="enableTone">Yes</part>
+		</item>
+		<item name="features.history">
+			<part name="defaultSource">Default</part>
+			<part name="missedCallNotification">Yes</part>
+		</item>
+		<item name="sip.blf">
+			<part name="lightPattern">Default</part>
+			<part name="hideRemoteStatus">No</part>
+		</item>
+		<item name="lcd">
+			<part name="contrast">3</part>
+		</item>
+		<item name="network.rtp">
+			<part name="useRandomPort">Yes</part>
+		</item>
+		<item name="network.wifi.countryCode">
+			<part name="public">UNITEDKINGDOM</part>
+		</item>
+		<item name="network.802.1x">
+			<part name="mode">Disable</part>
+		</item>
+		<item name="network.port.eth.1">
+			<part name="type">DHCP</part>
+		</item>
+		<item name="call.incomingCall">
+			<part name="ringMode">Enabled</part>
+		</item>
+		<item name="network.wifi.ssid.0">
+			<part name="essid">wp_master</part>
+			<part name="enabled">Yes</part>
+			<part name="key_management">WPA_PSK</part>
+			<part name="eap_method">PWD</part>
+			<part name="80211r">No</part>
+			<part name="priority">0</part>
+		</item>
+		<item name="network.wifi.ssid.0.eap.peap.phase2">
+			<part name="auth_type">NONE</part>
+		</item>
+		<item name="network.wifi.ssid.0.eap">
+			<part name="caCertificateType">SkipVerification</part>
+		</item>
+		<item name="network.wifi.ssid.0.ip">
+			<part name="protocol">BothAndPreferIPv4</part>
+		</item>
+		<item name="network.wifi.ssid.0.ipv4">
+			<part name="address_mode">DHCP</part>
+		</item>
+		<item name="network.wifi.ssid.0.ipv4.ip">
+			<part name="1">0</part>
+			<part name="2">0</part>
+			<part name="3">0</part>
+			<part name="4">0</part>
+		</item>
+		<item name="network.wifi.ssid.0.ipv4.netmask">
+			<part name="1">0</part>
+			<part name="2">0</part>
+			<part name="3">0</part>
+			<part name="4">0</part>
+		</item>
+		<item name="network.wifi.ssid.0.ipv4.gateway">
+			<part name="1">0</part>
+			<part name="2">0</part>
+			<part name="3">0</part>
+			<part name="4">0</part>
+		</item>
+		<item name="network.wifi.ssid.0.ipv4.dns1">
+			<part name="1">0</part>
+			<part name="2">0</part>
+			<part name="3">0</part>
+			<part name="4">0</part>
+		</item>
+		<item name="network.wifi.ssid.0.ipv4.dns2">
+			<part name="1">0</part>
+			<part name="2">0</part>
+			<part name="3">0</part>
+			<part name="4">0</part>
+		</item>
+		<item name="network.wifi.ssid.0.ipv4.preferred_dns">
+			<part name="1">0</part>
+			<part name="2">0</part>
+			<part name="3">0</part>
+			<part name="4">0</part>
+		</item>
+		<item name="network.wifi.ssid.0.ipv6">
+			<part name="address_mode">AutoConfigured</part>
+			<part name="static_mode">FullStatic</part>
+			<part name="prefix_length">0</part>
+		</item>
+		<item name="network.wifi.ssid.1">
+			<part name="essid">IOT</part>
+			<part name="key_management">WPA3_SAE_LEGACY</part>
+			<part name="eap_method">PEAP</part>
+			<part name="80211r">No</part>
+			<part name="priority">0</part>
+		</item>
+		<item name="network.wifi.ssid.1.eap.peap.phase2">
+			<part name="auth_type">NONE</part>
+		</item>
+		<item name="network.wifi.ssid.1.ip">
+			<part name="protocol">BothAndPreferIPv6</part>
+		</item>
+		<item name="network.wifi.ssid.1.ipv4">
+			<part name="address_mode">DHCP</part>
+		</item>
+		<item name="network.wifi.ssid.1.ipv4.ip">
+			<part name="1">0</part>
+			<part name="2">0</part>
+			<part name="3">0</part>
+			<part name="4">0</part>
+		</item>
+		<item name="network.wifi.ssid.1.ipv4.netmask">
+			<part name="1">0</part>
+			<part name="2">0</part>
+			<part name="3">0</part>
+			<part name="4">0</part>
+		</item>
+		<item name="network.wifi.ssid.1.ipv4.gateway">
+			<part name="1">0</part>
+			<part name="2">0</part>
+			<part name="3">0</part>
+			<part name="4">0</part>
+		</item>
+		<item name="network.wifi.ssid.1.ipv4.dns1">
+			<part name="1">0</part>
+			<part name="2">0</part>
+			<part name="3">0</part>
+			<part name="4">0</part>
+		</item>
+		<item name="network.wifi.ssid.1.ipv4.dns2">
+			<part name="1">0</part>
+			<part name="2">0</part>
+			<part name="3">0</part>
+			<part name="4">0</part>
+		</item>
+		<item name="network.wifi.ssid.1.ipv4.preferred_dns">
+			<part name="1">0</part>
+			<part name="2">0</part>
+			<part name="3">0</part>
+			<part name="4">0</part>
+		</item>
+		<item name="network.wifi.ssid.1.ipv6">
+			<part name="address_mode">AutoConfigured</part>
+			<part name="static_mode">FullStatic</part>
+			<part name="prefix_length">0</part>
+		</item>
+		<item name="network.wifi.ssid.2">
+			<part name="key_management">None</part>
+			<part name="eap_method">PWD</part>
+			<part name="80211r">No</part>
+		</item>
+		<item name="network.wifi.ssid.2.eap.peap.phase2">
+			<part name="auth_type">NONE</part>
+		</item>
+		<item name="network.wifi.ssid.2.ip">
+			<part name="protocol">BothAndPreferIPv4</part>
+		</item>
+		<item name="network.wifi.ssid.2.ipv4">
+			<part name="address_mode">DHCP</part>
+		</item>
+		<item name="network.wifi.ssid.2.ipv4.ip">
+			<part name="1">0</part>
+			<part name="2">0</part>
+			<part name="3">0</part>
+			<part name="4">0</part>
+		</item>
+		<item name="network.wifi.ssid.2.ipv4.netmask">
+			<part name="1">0</part>
+			<part name="2">0</part>
+			<part name="3">0</part>
+			<part name="4">0</part>
+		</item>
+		<item name="network.wifi.ssid.2.ipv4.gateway">
+			<part name="1">0</part>
+			<part name="2">0</part>
+			<part name="3">0</part>
+			<part name="4">0</part>
+		</item>
+		<item name="network.wifi.ssid.2.ipv4.dns1">
+			<part name="1">0</part>
+			<part name="2">0</part>
+			<part name="3">0</part>
+			<part name="4">0</part>
+		</item>
+		<item name="network.wifi.ssid.2.ipv4.dns2">
+			<part name="1">0</part>
+			<part name="2">0</part>
+			<part name="3">0</part>
+			<part name="4">0</part>
+		</item>
+		<item name="network.wifi.ssid.2.ipv4.preferred_dns">
+			<part name="1">0</part>
+			<part name="2">0</part>
+			<part name="3">0</part>
+			<part name="4">0</part>
+		</item>
+		<item name="network.wifi.ssid.2.ipv6">
+			<part name="address_mode">AutoConfigured</part>
+			<part name="static_mode">FullStatic</part>
+			<part name="prefix_length">0</part>
+		</item>
+		<item name="affinity">
+			<part name="enable">No</part>
+			<part name="preferredAccount">Account1</part>
+		</item>
+		<item name="services.autoLocation">
+			<part name="enable">Yes</part>
+		</item>
+		<item name="softkeys.state.idle">
+			<part name="hideSystemKeys">Custom-Menu,Custom-History,Custom-Contacts,Custom-Redial,Custom-DND</part>
+		</item>
+		<item name="sip.blf.eventlist">
+			<part name="provisionStartingFrom">MPK</part>
+		</item>
+		<item name="call.dial.liveDialpad">
+			<part name="enable">No</part>
+			<part name="expire">5</part>
+		</item>
+		<item name="audio.volume">
+			<part name="ring">2</part>
+			<part name="lock">No</part>
+			<part name="notification">5</part>
+		</item>
+		<item name="call.dial.autoRedial">
+			<part name="enable">No</part>
+			<part name="retry">10</part>
+			<part name="interval">10</part>
+		</item>
+		<item name="sip.returnCode">
+			<part name="callReject">Busy</part>
+			<part name="dnd">Temporarily Unavailable</part>
+		</item>
+		<item name="call.dnd">
+			<part name="allowCallList">Off</part>
+			<part name="enable">Yes</part>
+		</item>
+		<item name="provisioning.firmware.confirm">
+			<part name="enable">Yes</part>
+		</item>
+		<item name="softkeys.state.call">
+			<part name="showTargetKey">Yes</part>
+		</item>
+		<item name="call.dial.offhook.autoDial">
+			<part name="delay">4</part>
+		</item>
+		<item name="call.dial.callComplete">
+			<part name="enable">No</part>
+		</item>
+		<item name="audio.ring">
+			<part name="defaultRingtone">0</part>
+		</item>
+		<item name="callFeatures.incomingPopup">
+			<part name="enable">Yes</part>
+		</item>
+		<item name="pks.lcdSetting">
+			<part name="enable">Yes</part>
+		</item>
+		<item name="call.recording.replaceOldRecord">
+			<part name="enable">No</part>
+		</item>
+		<item name="provisioning.auto.randomTime">
+			<part name="enable">No</part>
+		</item>
+		<item name="security.validate">
+			<part name="serverCertificate">No</part>
+		</item>
+		<item name="call.transfer.holdCall">
+			<part name="enable">Yes</part>
+		</item>
+		<item name="provisioning.config.processAll">
+			<part name="enable">No</part>
+		</item>
+		<item name="users.testPasswordStrength">
+			<part name="enable">No</part>
+		</item>
+		<item name="security.webAccess.user">
+			<part name="enable">Yes</part>
+		</item>
+		<item name="features.im.popup">
+			<part name="enable">Yes</part>
+		</item>
+		<item name="call.autoAnswerDelay">
+			<part name="value">0</part>
+		</item>
+		<item name="tr069.randomStart">
+			<part name="enable">No</part>
+		</item>
+		<item name="callFeatures.autoUnmute">
+			<part name="enable">Yes</part>
+		</item>
+		<item name="audio.report">
+			<part name="enable">No</part>
+			<part name="interval">20</part>
+		</item>
+		<item name="audio.report.interval">
+			<part name="enable">No</part>
+		</item>
+		<item name="audio.report.warning.moslq">
+			<part name="threshold">0</part>
+		</item>
+		<item name="audio.report.critical.moslq">
+			<part name="threshold">0</part>
+		</item>
+		<item name="audio.report.warning.delay">
+			<part name="threshold">0</part>
+		</item>
+		<item name="audio.report.critical.delay">
+			<part name="threshold">0</part>
+		</item>
+		<item name="audio.report.display.web">
+			<part name="enable">No</part>
+		</item>
+		<item name="audio.report.display.lcd">
+			<part name="enable">No</part>
+			<part name="layout">Overview,PacketLostRate,RoundTripDelay,Jitter,MosLQ,MosCQ</part>
+		</item>
+		<item name="trustedCACertificates">
+			<part name="load">Default Certificates</part>
+		</item>
+		<item name="call.hold.showHoldDuration">
+			<part name="enable">Yes</part>
+		</item>
+		<item name="security.cipher.suite">
+			<part name="options">5</part>
+		</item>
+		<item name="audio.NoiseShield.handset">
+			<part name="type">HighShielding</part>
+		</item>
+		<item name="audio.NoiseShield.headset">
+			<part name="type">ModerateHeadset</part>
+		</item>
+		<item name="e911">
+			<part name="enable">No</part>
+			<part name="emergency">911</part>
+		</item>
+		<item name="e911.held">
+			<part name="protocol">HTTP</part>
+			<part name="syncInterval">0</part>
+			<part name="locationType">geodetic,civic,locationURI</part>
+			<part name="lldpInfo">No</part>
+			<part name="nai">No</part>
+		</item>
+		<item name="e911.header">
+			<part name="geolocationRouting">No</part>
+			<part name="priority">No</part>
+			<part name="geolocationFormat">Legacy</part>
+		</item>
+		<item name="security.rootCA">
+			<part name="version">ecdsa-with-SHA384</part>
+		</item>
+		<item name="energySaving">
+			<part name="avsStandby">Disabled</part>
+		</item>
+		<item name="pks.num.0">
+			<part name="keyMode">None</part>
+			<part name="account">ActiveAccount</part>
+		</item>
+		<item name="pks.num.1">
+			<part name="keyMode">None</part>
+			<part name="account">ActiveAccount</part>
+		</item>
+		<item name="pks.num.2">
+			<part name="keyMode">None</part>
+			<part name="account">ActiveAccount</part>
+		</item>
+		<item name="pks.num.3">
+			<part name="keyMode">None</part>
+			<part name="account">ActiveAccount</part>
+		</item>
+		<item name="pks.num.4">
+			<part name="keyMode">None</part>
+			<part name="account">ActiveAccount</part>
+		</item>
+		<item name="pks.num.5">
+			<part name="keyMode">None</part>
+			<part name="account">ActiveAccount</part>
+		</item>
+		<item name="pks.num.6">
+			<part name="keyMode">None</part>
+			<part name="account">ActiveAccount</part>
+		</item>
+		<item name="pks.num.7">
+			<part name="keyMode">None</part>
+			<part name="account">ActiveAccount</part>
+		</item>
+		<item name="pks.num.8">
+			<part name="keyMode">None</part>
+			<part name="account">ActiveAccount</part>
+		</item>
+		<item name="pks.num.9">
+			<part name="keyMode">None</part>
+			<part name="account">ActiveAccount</part>
+		</item>
+		<item name="ledControl.handset.settings.brightness">
+			<part name="normal">5</part>
+		</item>
+		<item name="network.dns.preferred.ip">
+			<part name="1">0</part>
+			<part name="2">0</part>
+			<part name="3">0</part>
+			<part name="4">0</part>
+		</item>
+		<item name="account.1.ring.bellcoreMapping">
+			<part name="enable">Yes</part>
+		</item>
+		<item name="account.1.sip.notify.checkSync.defaultReboot">
+			<part name="enable">Yes</part>
+		</item>
+		<item name="account.2.ring.bellcoreMapping">
+			<part name="enable">Yes</part>
+		</item>
+		<item name="account.2.sip.notify.checkSync.defaultReboot">
+			<part name="enable">Yes</part>
+		</item>
+		<item name="account.3.ring.bellcoreMapping">
+			<part name="enable">Yes</part>
+		</item>
+		<item name="account.3.sip.notify.checkSync.defaultReboot">
+			<part name="enable">Yes</part>
+		</item>
+		<item name="account.1.codec.iLBC">
+			<part name="frameSize">30ms</part>
+		</item>
+		<item name="sip.blf.pickupScreen">
+			<part name="enable">No</part>
+		</item>
+		<item name="sip.blf.pickupSound">
+			<part name="enable">No</part>
+			<part name="mode">All Except</part>
+		</item>
+		<item name="provisioning.userProtect">
+			<part name="enable">No</part>
+		</item>
+		<item name="lockControl">
+			<part name="enable">No</part>
+		</item>
+	</config>
+</gs_provision>
+
+

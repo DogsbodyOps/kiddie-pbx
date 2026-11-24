@@ -14,6 +14,7 @@ nsg_security_rules = {
   }
   srtp-range = {
     priority                = 210
+    protocol                = "Udp"
     destination_port_ranges = ["10000-10199"]
     source_address_prefixes = ["0.0.0.0/0"]
   }
